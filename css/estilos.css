@@ -110,29 +110,59 @@ footer {
   font-weight: 400;
 }
 
-/* === RESPONSIVE === */
+/* === RESPONSIVE (móvil con el mismo layout que PC) === */
 @media (max-width: 900px) {
-  .nav-wrap { justify-content: flex-start; }
+  /* El contenedor puede seguir alineado como en desktop */
+  .nav-wrap { 
+    justify-content: center;    /* o space-between, como prefieras */
+    flex-wrap: wrap;
+    gap: 12px;
+  }
 
-  .nav-toggle { display: inline-block; }
+  /* Oculta el botón hamburguesa si quieres el mismo layout que PC */
+  .nav-toggle { 
+    display: none; 
+  }
 
+  /* Mantén el menú visible y en fila */
   .menu {
-    display: none;
-    flex-direction: column;
-    gap: 8px;
-    width: 100%;
-    margin-top: 10px;
+    display: flex;              /* ❗ visible, no lo ocultes */
+    flex-direction: row;        /* ❗ en fila como PC */
+    flex-wrap: wrap;
+    justify-content: center;    /* centra los <li> */
+    gap: 32px;                  /* separa los <li> (ajusta a gusto) */
+    width: auto;
+    margin-top: 0;
   }
-  .menu.open { display: flex; }
+  .menu.open { display: flex; } /* inofensivo si no usas el toggle */
 
-  /* Submenús en flujo vertical */
+  /* Mantén los submenús flotantes como en PC (no los hagas estáticos) */
   .submenu {
-    position: static;
-    min-width: 0;
-    box-shadow: none;
-    border: 0;
-    padding: 0;
+    position: absolute;
+    left: 0;
+    top: 100%;
+    min-width: 220px;
+    background: #fff;
+    color: #0f172a;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    box-shadow: 0 10px 24px rgba(2, 8, 23, .15);
+    padding: 6px;
+    z-index: 999;
   }
-  .submenu .submenu { position: static; }
-  .submenu li a { padding-left: 18px; }
+  .submenu .submenu {
+    position: absolute;
+    top: 0;
+    left: calc(100% - 6px);
+    min-width: 220px;
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    box-shadow: 0 10px 24px rgba(2, 8, 23, .15);
+    padding: 6px;
+    z-index: 1000;
+  }
+
+  /* (Opcional) pequeño sangrado para items dentro de submenús */
+  .submenu li a { padding-left: 12px; }
 }
