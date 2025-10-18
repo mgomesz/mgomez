@@ -41,7 +41,7 @@ header .logo img { width: 100%; height: auto; display: block; object-fit: cover;
   list-style: none;
   display: flex;
   flex-wrap: wrap;
-  gap: 100px;
+  gap: 70px;
   align-items: center;
   margin: 0;
   padding: 0;
