@@ -1,6 +1,6 @@
 /* === RESETEO Y BASE === */
 * { box-sizing: border-box; margin: 0; padding: 0; }
-body { font-family: 'Segoe UI', Arial, sans-serif; color: #fff; }
+body { font-family: 'Segoe UI', Arial, sans-serif; color: #fff; overflow-x: hidden; }
 
 /* === HEADER === */
 header { width: 100%; overflow: hidden; }
@@ -10,54 +10,60 @@ header .logo img { width: 100%; height: auto; display: block; object-fit: cover;
 .nav {
   position: relative;
   z-index: 100;
-  background: linear-gradient(
-    270deg,
-    #ffcc80,
-    #ffe0b2,
-    #e1f5fe,
-    #c5cae9,
-    #b39ddb,
-    #ffcc80
-  );
+  background: linear-gradient(270deg,#ffcc80,#ffe0b2,#e1f5fe,#c5cae9,#b39ddb,#ffcc80);
   background-size: 600% 600%;
   animation: movimientoGradiente 12s ease infinite;
   color: #000;
   font-weight: 600;
 }
 
-/* Animación del degradado */
 @keyframes movimientoGradiente {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
-.nav-wrap { max-width: 1200px; margin: 0 auto; padding: 6px 16px; display: flex; align-items: center; justify-content: center; }
+.nav-wrap { max-width: 1200px; margin: 0 auto; padding: 8px 16px; display: flex; align-items: center; justify-content: center;gap: 12px; }
 
-/* Botón hamburguesa (solo móvil) */
-.nav-toggle { display: none; background: transparent; border: 2px solid rgba(255,255,255,.6); color: #fff; padding: 6px 10px; border-radius: 8px; margin-right: 12px; cursor: pointer; }
+/* Botón hamburguesa */
+.nav-toggle {
+  display: none;
+  background: transparent;
+  border: 2px solid rgba(0,0,0,.35);
+  color: #000;
+  padding: 6px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+}
 
 /* Lista principal */
-.menu { list-style: none; display: flex; gap: 200px; align-items: center; margin: 0; padding: 0; }
+.menu {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 100px;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+}
 .menu > li { position: relative; }
 
 /* Botones/enlaces del menú */
 .menu > li > a, .dd-toggle {
-  color: black; font-weight: 500; font-size: 17px; padding: 6px 10px;
-  border-radius: 10px; border: 1px solid transparent; background: transparent;
-  cursor: pointer; transition: background .3s;
+  color: #000;
+  font-weight: 500;
+  font-size: 16px;
+  padding: 6px 10px;
+  border-radius: 10px;
+  border: 1px solid transparent;
+  background: transparent;
+  cursor: pointer;
+  transition: background .25s;
 }
-.menu > li > a:hover, .dd-toggle:hover { background: rgba(255,255,255,.15); }
+.menu > li > a:hover, .dd-toggle:hover { background: rgba(0,0,0,.06); }
 
 /* === SUBMENÚ PRIMER NIVEL === */
-.has-sub { position: relative; padding-bottom: 10px; } /* puente hacia abajo */
-
+.has-sub { position: relative; padding-bottom: 10px; }
 .submenu {
   position: absolute; left: 0; top: 100%;
   min-width: 220px; background: #fff; color: #0f172a;
@@ -65,28 +71,25 @@ header .logo img { width: 100%; height: auto; display: block; object-fit: cover;
   box-shadow: 0 10px 24px rgba(2, 8, 23, .15);
   padding: 6px; list-style: none; display: none; z-index: 999;
 }
-
 .submenu li a {
   display: block; padding: 10px 12px; border-radius: 8px;
-  color: inherit; text-decoration: none; font-weight: 600; transition: background .3s;
+  color: inherit; text-decoration: none; font-weight: 600; transition: background .25s;
 }
 .submenu li a:hover { background: #f1f5f9; }
 
 /* Mostrar submenús por hover/foco en desktop */
-.has-sub:hover > .submenu, .has-sub:focus-within > .submenu { display: block; }
+.has-sub:hover > .submenu,
+.has-sub:focus-within > .submenu { display: block; }
 
-/* Mostrar submenú cuando se abre por JS */
+/* Cuando se abre por JS */
 .has-sub.open > .submenu { display: block; }
-.has-sub.open > .dd-toggle { background: rgba(255,255,255,.15); }
+.has-sub.open > .dd-toggle { background: rgba(0,0,0,.06); }
 
-/* === SUB-SUBMENÚ (SIN HUECOS) === */
+/* === SUB-SUBMENÚ === */
 .submenu .has-sub { position: relative; padding-right: 10px; }
-.submenu .has-sub::after { content: ""; position: absolute; top: 0; right: -10px; width: 10px; height: 100%; } /* puente */
-
 .submenu .submenu {
-  position: absolute; top: 0; left: calc(100% - 6px); /* solapa 6px */
-  margin-left: 0; min-width: 220px;
-  background: #fff; border: 1px solid #e2e8f0; border-radius: 12px;
+  position: absolute; top: 0; left: calc(100% - 6px);
+  min-width: 220px; background: #fff; border: 1px solid #e2e8f0; border-radius: 12px;
   box-shadow: 0 10px 24px rgba(2, 8, 23, .15);
   padding: 6px; display: none; z-index: 1000;
 }
@@ -95,51 +98,41 @@ header .logo img { width: 100%; height: auto; display: block; object-fit: cover;
 /* === MAIN === */
 main { position: relative; width: 100%; height: 100vh; overflow: hidden; }
 main .fondo { width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; }
-main section { background-color: rgba(0,0,0,.0); padding: 0; border-radius: 0; } /* placeholders */
 
 /* === FOOTER === */
 footer {
   text-align: center;
   padding: 20px;
-  background: linear-gradient(
-    270deg,
-    #ffcc80,
-    #ffe0b2,
-    #e1f5fe,
-    #c5cae9,
-    #b39ddb,
-    #ffcc80
-  );
+  background: linear-gradient(270deg,#ffcc80,#ffe0b2,#e1f5fe,#c5cae9,#b39ddb,#ffcc80);
   background-size: 600% 600%;
   animation: movimientoGradiente 12s ease infinite;
   color: #000;
   font-weight: 400;
 }
 
-/* === ANIMACIÓN COMPARTIDA === */
-@keyframes movimientoGradiente {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-}
-
-
 /* === RESPONSIVE === */
 @media (max-width: 900px) {
   .nav-wrap { justify-content: flex-start; }
+
   .nav-toggle { display: inline-block; }
 
-  .menu { display: none; flex-direction: column; gap: 8px; width: 100%; margin-top: 10px; }
+  .menu {
+    display: none;
+    flex-direction: column;
+    gap: 8px;
+    width: 100%;
+    margin-top: 10px;
+  }
   .menu.open { display: flex; }
 
   /* Submenús en flujo vertical */
-  .submenu { position: static; left: auto; top: auto; min-width: 0; box-shadow: none; border: 0; padding: 0; }
-  .submenu .submenu { position: static; left: auto; top: auto; }
+  .submenu {
+    position: static;
+    min-width: 0;
+    box-shadow: none;
+    border: 0;
+    padding: 0;
+  }
+  .submenu .submenu { position: static; }
   .submenu li a { padding-left: 18px; }
 }

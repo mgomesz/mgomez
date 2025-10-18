@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Especialidad Desarrollo Web</title>
   <link rel="stylesheet" href="css/estilos.css" />
 </head>
@@ -13,91 +13,80 @@
       <img src="css/img/encabezado.jpg" alt="Encabezado del sitio" />
     </div>
   </header>
+
   <!-- Menú principal -->
-    <nav aria-label="Menú principal" class="nav">
-      <div class="nav-wrap">
-        <ul id="menu" class="menu">
- <!-- *********************************************************************************************** -->
+  <nav aria-label="Menú principal" class="nav">
+    <div class="nav-wrap">
+      <!-- Botón hamburguesa (necesario en móvil) -->
+      <button class="nav-toggle" aria-controls="menu" aria-expanded="false" aria-label="Abrir menú">☰ Menú</button>
+
+      <ul id="menu" class="menu">
+        <!-- ***************************************************************** -->
+        <li class="has-sub">
+          <button class="dd-toggle" aria-haspopup="true" aria-expanded="false">Evaluación</button>
+          <ul class="submenu" aria-label="Niveles Desarrollo Web">
+            <li><a href="https://drive.google.com/file/d/14k6aWtMFfjundVtSoKDgzp9fP39lkGzJ/view?usp=sharing" target="_blank" rel="noopener">Rubros de Evaluación</a></li>
+          </ul>
+        </li>
+        <!-- ***************************************************************** -->
+        <li class="has-sub">
+          <button class="dd-toggle" aria-haspopup="true" aria-expanded="false">Décimo</button>
+          <ul class="submenu" aria-label="Niveles Desarrollo Web">
             <li class="has-sub">
-                  <button class="dd-toggle" aria-haspopup="true" aria-expanded="false">
-                      Evaluación
-                  </button>
-                  <ul class="submenu" aria-label="Niveles Desarrollo Web">
-                    <li>
-                      <a href="https://drive.google.com/file/d/14k6aWtMFfjundVtSoKDgzp9fP39lkGzJ/view?usp=sharing" target="_blank">Rubros de Evaluación</a>
-                    </li>
-                  </ul>
-            </li>  
- <!-- *********************************************************************************************** -->
-                <!-- Ítem con submenú -->
-                <li class="has-sub">
-                  <button class="dd-toggle" aria-haspopup="true" aria-expanded="false">
-                      Décimo
-                  </button>
-                  <ul class="submenu" aria-label="Niveles Desarrollo Web">
-                            <li class="has-sub">
-                              <a href="#">Programación WEB</a>
-                              <!-- Segundo nivel (sub-submenú) -->
-                              <ul class="submenu">
-                                <li><a href="https://drive.google.com/file/d/1KjXg5dEv6ZteHvvqPkL0cAfrO70YwYsa/view?usp=sharing" target="_blank">Lenguaje de marcado HTML</a></li>
-                                <li><a href="https://www.w3schools.com/css/default.asp" target="_blank">CSS</a></li>
-                                <li><a href="https://www.w3schools.com/js/default.asp" target="_blank">JAVASCRIPT</a></li>
-                                <li><a href="https://betogome.github.io/simbolospatrios/" target="_blank">Galería Web Símbolos Patrios</a></li>
-                                <li><a href="https://betogome.github.io/calendario/" target="_blank">Calendario Anual de Costa Rica 2025</a></li>
-                              </ul>
-                            </li>
+              <a href="#" aria-expanded="false">Programación WEB</a>
+              <ul class="submenu">
+                <li><a href="https://drive.google.com/file/d/1KjXg5dEv6ZteHvvqPkL0cAfrO70YwYsa/view?usp=sharing" target="_blank" rel="noopener">Lenguaje de marcado HTML</a></li>
+                <li><a href="https://www.w3schools.com/css/default.asp" target="_blank" rel="noopener">CSS</a></li>
+                <li><a href="https://www.w3schools.com/js/default.asp" target="_blank" rel="noopener">JAVASCRIPT</a></li>
+                <li><a href="https://betogome.github.io/simbolospatrios/" target="_blank" rel="noopener">Galería Web Símbolos Patrios</a></li>
+                <li><a href="https://betogome.github.io/calendario/" target="_blank" rel="noopener">Calendario Anual de Costa Rica 2025</a></li>
+              </ul>
+            </li>
 
-                            <li class="has-sub">
-                                  <a href="#">Diseño de software</a>
-                                  <!-- Segundo nivel (sub-submenú) -->
-                                  <ul class="submenu">
-                                    <li><a href="https://drive.google.com/file/d/1qqThIsKWDlLpiuYAb9vK_9d3-uZ6PAjw/view?usp=sharing" target="_blank">Procesos de software</a></li>
-                                    <li><a href="https://drive.google.com/file/d/1Wg4JsSRQe81xol5VKL6u28s7OCTz3ngy/view?usp=sharing" target="_blank">Modelado de requerimientos</a></li>
-                                    <li><a href="https://drive.google.com/file/d/1O19wJ-7ufRl02-x7lNYakjoTEIH4Ywgr/view?usp=sharing" target="_blank">Diseño arquitectónico</a></li>
-                                  </ul>
-                            </li>
-                            
-                            
-                            <li class="has-sub">
-                                  <a href="#">Soporte TI</a>
-                                  <!-- Segundo nivel (sub-submenú) -->
-                                  <ul class="submenu">
-                                    <li><a href="https://drive.google.com/file/d/1I8qEpqu3ivSyeDymj8ORVjFTG5y9Pu06/view?usp=sharing" target="_blank">Fundamentos de tecnologías de información</a></li>
-                                  </ul>
-                            </li>
+            <li class="has-sub">
+              <a href="#" aria-expanded="false">Diseño de software</a>
+              <ul class="submenu">
+                <li><a href="https://drive.google.com/file/d/1qqThIsKWDlLpiuYAb9vK_9d3-uZ6PAjw/view?usp=sharing" target="_blank" rel="noopener">Procesos de software</a></li>
+                <li><a href="https://drive.google.com/file/d/1Wg4JsSRQe81xol5VKL6u28s7OCTz3ngy/view?usp=sharing" target="_blank" rel="noopener">Modelado de requerimientos</a></li>
+                <li><a href="https://drive.google.com/file/d/1O19wJ-7ufRl02-x7lNYakjoTEIH4Ywgr/view?usp=sharing" target="_blank" rel="noopener">Diseño arquitectónico</a></li>
+              </ul>
+            </li>
 
-                            <li class="has-sub">
-                                  <a href="#">Tecnología de la información</a>
-                                  <!-- Segundo nivel (sub-submenú) -->
-                                  <ul class="submenu">
-                                    <li><a href="https://drive.google.com/file/d/1b1mKqrc-9PTCgnE49NMPAk4hl0NErDwm/view?usp=sharing" target="_blank">Herramientas para la producción de documentos</a></li>
-                                    <li><a href="https://drive.google.com/file/d/1yODA_pSgS99Hgk603BrpVyTwBh37P4QL/view?usp=sharing" target="_blank">Herramientas para la gestión y análisis de la información</a></li>
-                                    <li><a href="https://drive.google.com/file/d/188AMS3nsHi72NIqW-U-_5_VDuS-0joFl/view?usp=sharing" target="_blank">Práctica de Bases de Datos</a></li>
-                                    <li><a href="#">Internet de todo y seguridad de los datos</a></li>
-                                  </ul>
-                            </li>
-                 </ul>
-               </li>
-<!-- *********************************************************************************************** -->
-                 <li class="has-sub">
-                  <button class="dd-toggle" aria-haspopup="true" aria-expanded="false">
-                    Undécimo
-                  </button>
-                </li>
-<!-- *********************************************************************************************** -->
-                <li class="has-sub">
-                  <button class="dd-toggle" aria-haspopup="true" aria-expanded="false">
-                    Duodécimo
-                  </button>
-                </li>
-        </ul>
-<!-- *********************************************************************************************** -->
-      </div>
-    </nav>
+            <li class="has-sub">
+              <a href="#" aria-expanded="false">Soporte TI</a>
+              <ul class="submenu">
+                <li><a href="https://drive.google.com/file/d/1I8qEpqu3ivSyeDymj8ORVjFTG5y9Pu06/view?usp=sharing" target="_blank" rel="noopener">Fundamentos de TI</a></li>
+              </ul>
+            </li>
+
+            <li class="has-sub">
+              <a href="#" aria-expanded="false">Tecnología de la información</a>
+              <ul class="submenu">
+                <li><a href="https://drive.google.com/file/d/1b1mKqrc-9PTCgnE49NMPAk4hl0NErDwm/view?usp=sharing" target="_blank" rel="noopener">Producción de documentos</a></li>
+                <li><a href="https://drive.google.com/file/d/1yODA_pSgS99Hgk603BrpVyTwBh37P4QL/view?usp=sharing" target="_blank" rel="noopener">Gestión y análisis de la información</a></li>
+                <li><a href="https://drive.google.com/file/d/188AMS3nsHi72NIqW-U-_5_VDuS-0joFl/view?usp=sharing" target="_blank" rel="noopener">Práctica de Bases de Datos</a></li>
+                <li><a href="#" aria-disabled="true">Internet de todo y seguridad de los datos</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+
+        <!-- ***************************************************************** -->
+        <li class="has-sub">
+          <button class="dd-toggle" aria-haspopup="true" aria-expanded="false">Undécimo</button>
+        </li>
+
+        <!-- ***************************************************************** -->
+        <li class="has-sub">
+          <button class="dd-toggle" aria-haspopup="true" aria-expanded="false">Duodécimo</button>
+        </li>
+      </ul>
+    </div>
+  </nav>
 
   <!-- Contenido principal -->
   <main>
-        <img src="css/img/desarrolloweb.jpeg" alt="Grupo 10-1 Desarrollo Web" class="fondo">  
+    <img src="css/img/desarrolloweb.jpeg" alt="Grupo 10-1 Desarrollo Web" class="fondo">
   </main>
 
   <!-- Pie de página -->
