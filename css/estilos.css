@@ -1,20 +1,37 @@
 /* === RESETEO Y BASE === */
-* { box-sizing: border-box; margin: 0; padding: 0; }
-body { font-family: 'Segoe UI', Arial, sans-serif; color: #fff; overflow-x: hidden; }
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Segoe UI", Arial, sans-serif;
+  color: #fff;
+  overflow-x: hidden;
+}
 
 /* === HEADER === */
-header { width: 100%; overflow: hidden; }
-header .logo img { width: 100%; height: auto; display: block; object-fit: cover; }
+header {
+  width: 100%;
+  overflow: hidden;
+}
+
+header .logo img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
 
 /* === NAV === */
 .nav {
   position: relative;
   z-index: 100;
-  background: linear-gradient(270deg,#ffcc80,#ffe0b2,#e1f5fe,#c5cae9,#b39ddb,#ffcc80);
+  background: linear-gradient(270deg, #ffcc80, #ffe0b2, #e1f5fe, #c5cae9, #b39ddb, #ffcc80);
   background-size: 600% 600%;
   animation: movimientoGradiente 12s ease infinite;
   color: #000;
-  font-weight: 600;
 }
 
 @keyframes movimientoGradiente {
@@ -23,146 +40,136 @@ header .logo img { width: 100%; height: auto; display: block; object-fit: cover;
   100% { background-position: 0% 50%; }
 }
 
-.nav-wrap { max-width: 1200px; margin: 0 auto; padding: 8px 16px; display: flex; align-items: center; justify-content: center;gap: 12px; }
-
-/* Botón hamburguesa */
-.nav-toggle {
-  display: none;
-  background: transparent;
-  border: 2px solid rgba(0,0,0,.35);
-  color: #000;
-  padding: 6px 10px;
-  border-radius: 8px;
-  cursor: pointer;
+.nav-wrap {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 8px 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-/* Lista principal */
 .menu {
   list-style: none;
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   gap: 70px;
   align-items: center;
-  margin: 0;
-  padding: 0;
 }
-.menu > li { position: relative; }
 
-/* Botones/enlaces del menú */
-.menu > li > a, .dd-toggle {
+.menu > li,
+.has-sub {
+  position: relative;
+}
+
+.menu > li > .dd-toggle {
+  display: inline-block;
+  padding: 6px 10px 16px;
   color: #000;
-  font-weight: 500;
   font-size: 16px;
-  padding: 6px 10px;
+  font-weight: 500;
+  text-decoration: none;
   border-radius: 10px;
-  border: 1px solid transparent;
-  background: transparent;
+  transition: background 0.25s ease;
   cursor: pointer;
-  transition: background .25s;
 }
-.menu > li > a:hover, .dd-toggle:hover { background: rgba(0,0,0,.06); }
 
-/* === SUBMENÚ PRIMER NIVEL === */
-.has-sub { position: relative; padding-bottom: 10px; }
+.menu > li > .dd-toggle:hover,
+.has-sub.open > .dd-toggle {
+  background: rgba(0, 0, 0, 0.06);
+}
+
+/* === SUBMENÚ NIVEL 1 === */
 .submenu {
-  position: absolute; left: 0; top: 100%;
-  min-width: 220px; background: #fff; color: #0f172a;
-  border: 1px solid #e2e8f0; border-radius: 12px;
-  box-shadow: 0 10px 24px rgba(2, 8, 23, .15);
-  padding: 6px; list-style: none; display: none; z-index: 999;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  min-width: 220px;
+  padding: 6px;
+  list-style: none;
+  background: #fff;
+  color: #0f172a;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  box-shadow: 0 10px 24px rgba(2, 8, 23, 0.15);
+  display: none;
+  z-index: 999;
 }
-.submenu li a {
-  display: block; padding: 10px 12px; border-radius: 8px;
-  color: inherit; text-decoration: none; font-weight: 600; transition: background .25s;
-}
-.submenu li a:hover { background: #f1f5f9; }
 
-/* Mostrar submenús por hover/foco en desktop */
 .has-sub:hover > .submenu,
-.has-sub:focus-within > .submenu { display: block; }
+.has-sub:focus-within > .submenu,
+.has-sub.open > .submenu {
+  display: block;
+}
 
-/* Cuando se abre por JS */
-.has-sub.open > .submenu { display: block; }
-.has-sub.open > .dd-toggle { background: rgba(0,0,0,.06); }
+/* === ITEMS DENTRO DE SUBMENÚ === */
+.submenu a {
+  display: block;
+  width: 100%;
+  padding: 10px 12px;
+  color: inherit;
+  text-decoration: none;
+  font-weight: 600;
+  border-radius: 8px;
+  transition: background 0.25s ease;
+  text-align: left;
+}
+
+.submenu a:hover,
+.submenu .has-sub.open > .dd-toggle {
+  background: #f1f5f9;
+}
 
 /* === SUB-SUBMENÚ === */
-.submenu .has-sub { position: relative; padding-right: 10px; }
 .submenu .submenu {
-  position: absolute; top: 0; left: calc(100% - 6px);
-  min-width: 220px; background: #fff; border: 1px solid #e2e8f0; border-radius: 12px;
-  box-shadow: 0 10px 24px rgba(2, 8, 23, .15);
-  padding: 6px; display: none; z-index: 1000;
+  top: 0;
+  left: calc(100% - 6px);
+  z-index: 1000;
 }
-.submenu .has-sub:hover > .submenu { display: block; }
 
 /* === MAIN === */
-main { position: relative; width: 100%; height: 100vh; overflow: hidden; }
-main .fondo { width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; }
+main {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+
+main .fondo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
 
 /* === FOOTER === */
 footer {
   text-align: center;
   padding: 20px;
-  background: linear-gradient(270deg,#ffcc80,#ffe0b2,#e1f5fe,#c5cae9,#b39ddb,#ffcc80);
+  background: linear-gradient(270deg, #ffcc80, #ffe0b2, #e1f5fe, #c5cae9, #b39ddb, #ffcc80);
   background-size: 600% 600%;
   animation: movimientoGradiente 12s ease infinite;
   color: #000;
   font-weight: 400;
 }
 
-/* === RESPONSIVE (móvil con el mismo layout que PC) === */
+/* === RESPONSIVE === */
 @media (max-width: 900px) {
-  /* El contenedor puede seguir alineado como en desktop */
-  .nav-wrap { 
-    justify-content: center;    /* o space-between, como prefieras */
-    flex-wrap: wrap;
-    gap: 12px;
+  .nav-wrap {
+    padding: 8px 12px;
   }
 
-  /* Oculta el botón hamburguesa si quieres el mismo layout que PC */
-  .nav-toggle { 
-    display: none; 
-  }
-
-  /* Mantén el menú visible y en fila */
   .menu {
-    display: flex;              /* ❗ visible, no lo ocultes */
-    flex-direction: row;        /* ❗ en fila como PC */
-    flex-wrap: wrap;
-    justify-content: center;    /* centra los <li> */
-    gap: 32px;                  /* separa los <li> (ajusta a gusto) */
-    width: auto;
-    margin-top: 0;
+    gap: 32px;
   }
-  .menu.open { display: flex; } /* inofensivo si no usas el toggle */
 
-  /* Mantén los submenús flotantes como en PC (no los hagas estáticos) */
   .submenu {
-    position: absolute;
-    left: 0;
-    top: 100%;
     min-width: 220px;
-    background: #fff;
-    color: #0f172a;
-    border: 1px solid #e2e8f0;
-    border-radius: 12px;
-    box-shadow: 0 10px 24px rgba(2, 8, 23, .15);
-    padding: 6px;
-    z-index: 999;
-  }
-  .submenu .submenu {
-    position: absolute;
-    top: 0;
-    left: calc(100% - 6px);
-    min-width: 220px;
-    background: #fff;
-    border: 1px solid #e2e8f0;
-    border-radius: 12px;
-    box-shadow: 0 10px 24px rgba(2, 8, 23, .15);
-    padding: 6px;
-    z-index: 1000;
   }
 
-  /* (Opcional) pequeño sangrado para items dentro de submenús */
-  .submenu li a { padding-left: 12px; }
+  .submenu a {
+    padding-left: 12px;
+  }
 }

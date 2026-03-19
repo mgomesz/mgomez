@@ -1,107 +1,61 @@
-// === Menú hamburguesa (móvil) ===
-const navToggle = document.querySelector('.nav-toggle');
-const menu = document.querySelector('.menu');
-
-if (navToggle && menu) {
-  navToggle.addEventListener('click', () => {
-    const open = menu.classList.toggle('open');
-    navToggle.setAttribute('aria-expanded', String(open));
+// === Función para cerrar todos los submenús ===
+function closeAllMenus() {
+  document.querySelectorAll('.has-sub.open').forEach(item => {
+    item.classList.remove('open');
+    const toggle = item.querySelector(':scope > .dd-toggle');
+    if (toggle) {
+      toggle.setAttribute('aria-expanded', 'false');
+    }
   });
 }
 
-// === Dropdown por clic para botones de primer nivel ===
-document.querySelectorAll('.has-sub').forEach(item => {
-  const btn = item.querySelector('.dd-toggle');
-  if (!btn) return;
+// === Toggle por clic para cualquier enlace con submenú ===
+document.querySelectorAll('.has-sub > .dd-toggle').forEach(toggle => {
+  toggle.addEventListener('click', (e) => {
+    const item = toggle.parentElement;
+    const submenu = item.querySelector(':scope > .submenu');
 
-  btn.addEventListener('click', (e) => {
+    if (!submenu) {
+      e.preventDefault();
+      return;
+    }
+
+    e.preventDefault();
     e.stopPropagation();
-    const open = item.classList.toggle('open');
-    btn.setAttribute('aria-expanded', String(open));
 
-    // Cerrar otros del mismo nivel
-    if (open) {
-      document.querySelectorAll('.has-sub').forEach(other => {
-        if (other !== item) {
-          other.classList.remove('open');
-          const obtn = other.querySelector('.dd-toggle, a[aria-expanded]');
-          obtn && obtn.setAttribute('aria-expanded', 'false');
+    const isOpen = item.classList.contains('open');
+
+    // Cierra hermanos del mismo nivel
+    item.parentElement.querySelectorAll(':scope > .has-sub').forEach(sibling => {
+      if (sibling !== item) {
+        sibling.classList.remove('open');
+        const siblingToggle = sibling.querySelector(':scope > .dd-toggle');
+        if (siblingToggle) {
+          siblingToggle.setAttribute('aria-expanded', 'false');
         }
-      });
-    }
-  });
-});
-
-// === Toggle por clic para <a> que tienen submenú debajo (cualquier nivel) ===
-document.querySelectorAll('.submenu .has-sub > a').forEach(link => {
-  link.addEventListener('click', (e) => {
-    const li = link.parentElement;
-    const sub = li.querySelector(':scope > .submenu');
-    if (sub) {
-      e.preventDefault(); // evita navegación si solo es toggle
-      e.stopPropagation();
-      const open = li.classList.toggle('open');
-      link.setAttribute('aria-expanded', String(open));
-
-      // Cerrar hermanos del mismo nivel
-      if (open) {
-        li.parentElement.querySelectorAll(':scope > .has-sub').forEach(sib => {
-          if (sib !== li) {
-            sib.classList.remove('open');
-            const sibA = sib.querySelector(':scope > a[aria-expanded], :scope > .dd-toggle');
-            sibA && sibA.setAttribute('aria-expanded', 'false');
-          }
-        });
       }
-    }
+    });
+
+    // Alterna el actual
+    item.classList.toggle('open', !isOpen);
+    toggle.setAttribute('aria-expanded', String(!isOpen));
   });
 });
 
-// === Cerrar todo SOLO si el clic fue fuera de la barra de navegación ===
+// === Cerrar menús al hacer clic fuera de la navegación ===
 document.addEventListener('click', (e) => {
   if (!e.target.closest('.nav')) {
-    document.querySelectorAll('.has-sub.open').forEach(item => {
-      item.classList.remove('open');
-      const btn = item.querySelector('.dd-toggle, a[aria-expanded]');
-      btn && btn.setAttribute('aria-expanded', 'false');
-    });
-  }
-});
-
-// === Evitar salto de página con enlaces de placeholder "#" (opcional) ===
-document.querySelectorAll('a[href="#"]').forEach(a => {
-  a.addEventListener('click', (e) => e.preventDefault());
-});
-
-
-
-
-// === Cerrar menús al seguir un enlace de submenú (navegación o descarga) ===
-function closeAllMenus() {
-  // cierra submenús abiertos
-  document.querySelectorAll('.has-sub.open').forEach(li => {
-    li.classList.remove('open');
-    const btn = li.querySelector('.dd-toggle, a[aria-expanded]');
-    btn && btn.setAttribute('aria-expanded', 'false');
-  });
-  // cierra menú hamburguesa si está abierto (móvil)
-  const navToggle = document.querySelector('.nav-toggle');
-  const menu = document.querySelector('.menu');
-  if (menu && menu.classList.contains('open')) {
-    menu.classList.remove('open');
-    navToggle && navToggle.setAttribute('aria-expanded', 'false');
-  }
-}
-
-document.querySelectorAll('.submenu a').forEach(a => {
-  a.addEventListener('click', (e) => {
-    const href = a.getAttribute('href') || '';
-    const isPlaceholder = href === '#' || href.trim() === '' || href.startsWith('#');
-
-    // Solo evita la navegación si es un placeholder/anchor interno sin destino real
-    if (isPlaceholder) e.preventDefault();
-
-    // Cierra todos los menús (funciona igual si abre en la misma pestaña, en otra, o descarga)
     closeAllMenus();
+  }
+});
+
+// === Cerrar menús al hacer clic en enlaces reales de submenú ===
+document.querySelectorAll('.submenu a').forEach(link => {
+  link.addEventListener('click', () => {
+    const href = link.getAttribute('href') || '';
+
+    if (href !== '#' && href.trim() !== '') {
+      closeAllMenus();
+    }
   });
 });
