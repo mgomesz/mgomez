@@ -63,6 +63,7 @@ header .logo img {
   position: relative;
 }
 
+.menu > li > a,
 .menu > li > .dd-toggle {
   display: inline-block;
   padding: 6px 10px 16px;
@@ -75,6 +76,7 @@ header .logo img {
   cursor: pointer;
 }
 
+.menu > li > a:hover,
 .menu > li > .dd-toggle:hover,
 .has-sub.open > .dd-toggle {
   background: rgba(0, 0, 0, 0.06);
@@ -85,7 +87,7 @@ header .logo img {
   position: absolute;
   top: 100%;
   left: 0;
-  min-width: 220px;
+  min-width: 280px;
   padding: 6px;
   list-style: none;
   background: #fff;
@@ -97,6 +99,8 @@ header .logo img {
   z-index: 999;
 }
 
+/* Desktop: abrir por hover */
+/* Móvil: abrir por JS con .open */
 .has-sub:hover > .submenu,
 .has-sub:focus-within > .submenu,
 .has-sub.open > .submenu {
@@ -124,7 +128,8 @@ header .logo img {
 /* === SUB-SUBMENÚ === */
 .submenu .submenu {
   top: 0;
-  left: calc(100% - 6px);
+  left: calc(100% + 6px);
+  min-width: 320px;
   z-index: 1000;
 }
 
@@ -136,12 +141,25 @@ main {
   overflow: hidden;
 }
 
-main .fondo {
+.fondo {
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: center;
   display: block;
+}
+
+.contenido {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+  background: #fff;
+}
+
+.oculto {
+  display: none;
 }
 
 /* === FOOTER === */
@@ -166,10 +184,22 @@ footer {
   }
 
   .submenu {
-    min-width: 220px;
+    min-width: 240px;
+  }
+
+  .submenu .submenu {
+    left: 0;
+    top: 100%;
+    min-width: 240px;
   }
 
   .submenu a {
     padding-left: 12px;
   }
+}
+
+/* Desactiva temporalmente la apertura por hover */
+.nav.no-hover .has-sub:hover > .submenu,
+.nav.no-hover .has-sub:focus-within > .submenu {
+  display: none !important;
 }
