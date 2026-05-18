@@ -28,10 +28,10 @@ header .logo img {
 .nav {
   position: relative;
   z-index: 100;
-  background: linear-gradient(270deg, #ffcc80, #ffe0b2, #e1f5fe, #c5cae9, #b39ddb, #ffcc80);
+  background:#0B1F4D;
   background-size: 600% 600%;
   animation: movimientoGradiente 12s ease infinite;
-  color: #000;
+  color: #D4AF37;
 }
 
 @keyframes movimientoGradiente {
@@ -67,7 +67,7 @@ header .logo img {
 .menu > li > .dd-toggle {
   display: inline-block;
   padding: 6px 10px 16px;
-  color: #000;
+  color: #D4AF37;
   font-size: 16px;
   font-weight: 500;
   text-decoration: none;
@@ -166,10 +166,10 @@ main {
 footer {
   text-align: center;
   padding: 20px;
-  background: linear-gradient(270deg, #ffcc80, #ffe0b2, #e1f5fe, #c5cae9, #b39ddb, #ffcc80);
+  background: #0B1F4D;
   background-size: 600% 600%;
   animation: movimientoGradiente 12s ease infinite;
-  color: #000;
+  color: #D4AF37;
   font-weight: 400;
 }
 
