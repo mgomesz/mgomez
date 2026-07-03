@@ -1,0 +1,205 @@
+/* === RESETEO Y BASE === */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Segoe UI", Arial, sans-serif;
+  color: #fff;
+  overflow-x: hidden;
+}
+
+/* === HEADER === */
+header {
+  width: 100%;
+  overflow: hidden;
+}
+
+header .logo img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
+/* === NAV === */
+.nav {
+  position: relative;
+  z-index: 100;
+  background:#0B1F4D;
+  background-size: 600% 600%;
+  animation: movimientoGradiente 12s ease infinite;
+  color: #D4AF37;
+}
+
+@keyframes movimientoGradiente {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.nav-wrap {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 8px 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.menu {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 70px;
+  align-items: center;
+}
+
+.menu > li,
+.has-sub {
+  position: relative;
+}
+
+.menu > li > a,
+.menu > li > .dd-toggle {
+  display: inline-block;
+  padding: 6px 10px 16px;
+  color: #D4AF37;
+  font-size: 16px;
+  font-weight: 500;
+  text-decoration: none;
+  border-radius: 10px;
+  transition: background 0.25s ease;
+  cursor: pointer;
+}
+
+.menu > li > a:hover,
+.menu > li > .dd-toggle:hover,
+.has-sub.open > .dd-toggle {
+  background: rgba(0, 0, 0, 0.06);
+}
+
+/* === SUBMENÚ NIVEL 1 === */
+.submenu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  min-width: 280px;
+  padding: 6px;
+  list-style: none;
+  background: #fff;
+  color: #0f172a;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  box-shadow: 0 10px 24px rgba(2, 8, 23, 0.15);
+  display: none;
+  z-index: 999;
+}
+
+/* Desktop: abrir por hover */
+/* Móvil: abrir por JS con .open */
+.has-sub:hover > .submenu,
+.has-sub:focus-within > .submenu,
+.has-sub.open > .submenu {
+  display: block;
+}
+
+/* === ITEMS DENTRO DE SUBMENÚ === */
+.submenu a {
+  display: block;
+  width: 100%;
+  padding: 10px 12px;
+  color: inherit;
+  text-decoration: none;
+  font-weight: 600;
+  border-radius: 8px;
+  transition: background 0.25s ease;
+  text-align: left;
+}
+
+.submenu a:hover,
+.submenu .has-sub.open > .dd-toggle {
+  background: #f1f5f9;
+}
+
+/* === SUB-SUBMENÚ === */
+.submenu .submenu {
+  top: 0;
+  left: calc(100% + 6px);
+  min-width: 320px;
+  z-index: 1000;
+}
+
+/* === MAIN === */
+main {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.fondo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+.contenido {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+  background: #fff;
+}
+
+.oculto {
+  display: none;
+}
+
+/* === FOOTER === */
+footer {
+  text-align: center;
+  padding: 20px;
+  background: #0B1F4D;
+  background-size: 600% 600%;
+  animation: movimientoGradiente 12s ease infinite;
+  color: #D4AF37;
+  font-weight: 400;
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 900px) {
+  .nav-wrap {
+    padding: 8px 12px;
+  }
+
+  .menu {
+    gap: 32px;
+  }
+
+  .submenu {
+    min-width: 240px;
+  }
+
+  .submenu .submenu {
+    left: 0;
+    top: 100%;
+    min-width: 240px;
+  }
+
+  .submenu a {
+    padding-left: 12px;
+  }
+}
+
+/* Desactiva temporalmente la apertura por hover */
+.nav.no-hover .has-sub:hover > .submenu,
+.nav.no-hover .has-sub:focus-within > .submenu {
+  display: none !important;
+}
