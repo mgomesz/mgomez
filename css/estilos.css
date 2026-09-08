@@ -1,204 +1,716 @@
-/* === RESETEO Y BASE === */
+/* ============================================================
+   RESETEO Y BASE
+============================================================ */
+
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
+
+html {
+  width: 100%;
+  min-height: 100%;
+}
+
+
 body {
+  width: 100%;
+
+  min-height: 100vh;
+  min-height: 100dvh;
+
+  display: flex;
+  flex-direction: column;
+
   font-family: "Segoe UI", Arial, sans-serif;
+
   color: #fff;
+
+  background: #fff;
+
   overflow-x: hidden;
 }
 
-/* === HEADER === */
+
+/* ============================================================
+   HEADER
+============================================================ */
+
 header {
   width: 100%;
+
+  flex: 0 0 auto;
+
   overflow: hidden;
 }
 
+
+header .logo {
+  width: 100%;
+}
+
+
 header .logo img {
+  display: block;
+
   width: 100%;
   height: auto;
-  display: block;
+
   object-fit: cover;
 }
 
-/* === NAV === */
+
+/* ============================================================
+   NAV
+============================================================ */
+
 .nav {
   position: relative;
+
+  width: 100%;
+
+  flex: 0 0 auto;
+
   z-index: 100;
-  background:#0B1F4D;
-  background-size: 600% 600%;
-  animation: movimientoGradiente 12s ease infinite;
+
+  background: #0B1F4D;
+
   color: #D4AF37;
 }
 
-@keyframes movimientoGradiente {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
+
+/* ============================================================
+   CONTENEDOR NAV
+============================================================ */
 
 .nav-wrap {
+  position: relative;
+
+  width: 100%;
   max-width: 1200px;
+
   margin: 0 auto;
+
   padding: 8px 16px;
+
   display: flex;
+
   justify-content: center;
+
   align-items: center;
 }
 
+
+/* ============================================================
+   MENÚ PRINCIPAL
+============================================================ */
+
 .menu {
+  width: 100%;
+
   list-style: none;
+
   display: flex;
+
   flex-wrap: wrap;
+
   justify-content: center;
-  gap: 70px;
+
   align-items: center;
+
+  gap: 70px;
 }
+
 
 .menu > li,
 .has-sub {
   position: relative;
 }
 
+
+/* ============================================================
+   ENLACES PRINCIPALES
+============================================================ */
+
 .menu > li > a,
 .menu > li > .dd-toggle {
   display: inline-block;
+
   padding: 6px 10px 16px;
+
   color: #D4AF37;
+
   font-size: 16px;
+
   font-weight: 500;
+
   text-decoration: none;
+
   border-radius: 10px;
-  transition: background 0.25s ease;
+
+  transition:
+    background 0.25s ease,
+    color 0.25s ease;
+
   cursor: pointer;
 }
+
 
 .menu > li > a:hover,
 .menu > li > .dd-toggle:hover,
 .has-sub.open > .dd-toggle {
-  background: rgba(0, 0, 0, 0.06);
+  background: rgba(255, 255, 255, 0.08);
 }
 
-/* === SUBMENÚ NIVEL 1 === */
+
+/* ============================================================
+   BOTÓN HAMBURGUESA
+============================================================ */
+
+.menu-toggle {
+  display: none;
+
+  width: 46px;
+  height: 42px;
+
+  padding: 8px;
+
+  border: 1px solid rgba(212, 175, 55, 0.45);
+
+  border-radius: 9px;
+
+  background: transparent;
+
+  cursor: pointer;
+
+  align-items: center;
+
+  justify-content: center;
+
+  flex-direction: column;
+
+  gap: 5px;
+}
+
+
+.menu-toggle:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+
+.menu-toggle span {
+  display: block;
+
+  width: 24px;
+  height: 2px;
+
+  background: #D4AF37;
+
+  border-radius: 10px;
+
+  transition:
+    transform 0.25s ease,
+    opacity 0.25s ease;
+}
+
+
+/* ============================================================
+   HAMBURGUESA ABIERTA
+============================================================ */
+
+.menu-toggle.activo span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+
+.menu-toggle.activo span:nth-child(2) {
+  opacity: 0;
+}
+
+
+.menu-toggle.activo span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+
+/* ============================================================
+   SUBMENÚ
+============================================================ */
+
 .submenu {
   position: absolute;
+
   top: 100%;
   left: 0;
+
   min-width: 280px;
+
   padding: 6px;
+
   list-style: none;
+
   background: #fff;
+
   color: #0f172a;
+
   border: 1px solid #e2e8f0;
+
   border-radius: 12px;
-  box-shadow: 0 10px 24px rgba(2, 8, 23, 0.15);
+
+  box-shadow:
+    0 10px 24px rgba(2, 8, 23, 0.15);
+
   display: none;
+
   z-index: 999;
 }
 
-/* Desktop: abrir por hover */
-/* Móvil: abrir por JS con .open */
+
+/* ============================================================
+   ABRIR SUBMENÚ EN ESCRITORIO
+============================================================ */
+
 .has-sub:hover > .submenu,
 .has-sub:focus-within > .submenu,
 .has-sub.open > .submenu {
   display: block;
 }
 
-/* === ITEMS DENTRO DE SUBMENÚ === */
+
+/* ============================================================
+   ELEMENTOS DEL SUBMENÚ
+============================================================ */
+
+.submenu li {
+  position: relative;
+}
+
+
 .submenu a {
   display: block;
+
   width: 100%;
+
   padding: 10px 12px;
+
   color: inherit;
+
   text-decoration: none;
+
   font-weight: 600;
+
   border-radius: 8px;
+
   transition: background 0.25s ease;
+
   text-align: left;
+
+  line-height: 1.35;
 }
+
 
 .submenu a:hover,
 .submenu .has-sub.open > .dd-toggle {
   background: #f1f5f9;
 }
 
-/* === SUB-SUBMENÚ === */
+
+/* ============================================================
+   SUB-SUBMENÚ
+============================================================ */
+
 .submenu .submenu {
   top: 0;
+
   left: calc(100% + 6px);
+
   min-width: 320px;
+
   z-index: 1000;
 }
 
-/* === MAIN === */
+
+/* ============================================================
+   MAIN
+============================================================ */
+
 main {
   position: relative;
+
   width: 100%;
-  height: 100vh;
+
+  flex: 1 1 auto;
+
+  min-height: 600px;
+
   overflow: hidden;
-}
 
-.fondo {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-  display: block;
-}
-
-.contenido {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  border: none;
   background: #fff;
 }
 
+
+/* ============================================================
+   IMAGEN DE INICIO
+============================================================ */
+
+.fondo {
+  display: block;
+
+  width: 100%;
+  height: 100%;
+
+  min-height: 600px;
+
+  object-fit: cover;
+
+  object-position: center;
+}
+
+
+/* ============================================================
+   IFRAME
+============================================================ */
+
+.contenido {
+  position: absolute;
+
+  inset: 0;
+
+  display: block;
+
+  width: 100%;
+  height: 100%;
+
+  min-height: 600px;
+
+  border: none;
+
+  background: #fff;
+}
+
+
+/* ============================================================
+   OCULTO
+============================================================ */
+
 .oculto {
-  display: none;
+  display: none !important;
 }
 
-/* === FOOTER === */
+
+/* ============================================================
+   FOOTER
+============================================================ */
+
 footer {
+  width: 100%;
+
+  flex: 0 0 auto;
+
   text-align: center;
+
   padding: 20px;
+
   background: #0B1F4D;
-  background-size: 600% 600%;
-  animation: movimientoGradiente 12s ease infinite;
+
   color: #D4AF37;
+
   font-weight: 400;
+
+  line-height: 1.5;
 }
 
-/* === RESPONSIVE === */
+
+/* ============================================================
+   TABLET Y CELULAR
+============================================================ */
+
 @media (max-width: 900px) {
+
+
+  /* ========================================================
+     NAV WRAP
+  ======================================================== */
+
   .nav-wrap {
     padding: 8px 12px;
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    justify-content: flex-end;
+
+    align-items: center;
   }
+
+
+  /* ========================================================
+     MOSTRAR HAMBURGUESA
+  ======================================================== */
+
+  .menu-toggle {
+    display: flex;
+  }
+
+
+  /* ========================================================
+     MENÚ PRINCIPAL
+  ======================================================== */
 
   .menu {
-    gap: 32px;
+    display: none;
+
+    width: 100%;
+
+    margin-top: 8px;
+
+    padding: 5px 0 10px;
+
+    flex-direction: column;
+
+    flex-wrap: nowrap;
+
+    align-items: stretch;
+
+    justify-content: flex-start;
+
+    gap: 2px;
   }
+
+
+  .menu.activo {
+    display: flex;
+  }
+
+
+  .menu > li {
+    width: 100%;
+  }
+
+
+  .menu > li > a,
+  .menu > li > .dd-toggle {
+    display: block;
+
+    width: 100%;
+
+    padding: 13px 14px;
+
+    font-size: 15px;
+
+    text-align: left;
+
+    border-radius: 8px;
+  }
+
+
+  /* ========================================================
+     DESACTIVAR HOVER MÓVIL
+  ======================================================== */
+
+  .has-sub:hover > .submenu,
+  .has-sub:focus-within > .submenu {
+    display: none;
+  }
+
+
+  /* ========================================================
+     ABRIR SOLAMENTE CON .OPEN
+  ======================================================== */
+
+  .has-sub.open > .submenu {
+    display: block;
+  }
+
+
+  /* ========================================================
+     SUBMENÚ MÓVIL
+  ======================================================== */
 
   .submenu {
-    min-width: 240px;
+    position: static;
+
+    top: auto;
+    left: auto;
+
+    width: 100%;
+
+    min-width: 0;
+
+    max-width: 100%;
+
+    margin: 2px 0 6px;
+
+    padding: 5px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    box-shadow: none;
+
+    background: #fff;
   }
+
+
+  /* ========================================================
+     SUB-SUBMENÚ MÓVIL
+  ======================================================== */
 
   .submenu .submenu {
-    left: 0;
-    top: 100%;
-    min-width: 240px;
+    position: static;
+
+    top: auto;
+    left: auto;
+
+    width: 100%;
+
+    min-width: 0;
+
+    max-width: 100%;
+
+    margin-top: 4px;
+
+    padding-left: 12px;
+
+    border-left: 3px solid #D4AF37;
+
+    border-radius: 5px;
   }
+
+
+  /* ========================================================
+     LINKS MÓVILES
+  ======================================================== */
 
   .submenu a {
-    padding-left: 12px;
+    width: 100%;
+
+    padding: 11px 12px;
+
+    white-space: normal;
+
+    overflow-wrap: anywhere;
+
+    word-break: normal;
+
+    font-size: 14px;
+
+    line-height: 1.4;
   }
+
+
+  /* ========================================================
+     MAIN
+  ======================================================== */
+
+  main {
+    min-height: 650px;
+  }
+
+
+  .fondo,
+  .contenido {
+    min-height: 650px;
+  }
+
+
+  /* ========================================================
+     FOOTER
+  ======================================================== */
+
+  footer {
+    padding: 16px 12px;
+
+    font-size: 14px;
+  }
+
 }
 
-/* Desactiva temporalmente la apertura por hover */
+
+/* ============================================================
+   TELÉFONOS
+============================================================ */
+
+@media (max-width: 600px) {
+
+  .nav-wrap {
+    padding: 8px 10px;
+  }
+
+
+  .menu-toggle {
+    width: 44px;
+    height: 40px;
+  }
+
+
+  .menu > li > a,
+  .menu > li > .dd-toggle {
+    padding: 12px;
+
+    font-size: 15px;
+  }
+
+
+  .submenu a {
+    padding: 10px;
+
+    font-size: 14px;
+  }
+
+
+  main {
+    min-height: 600px;
+  }
+
+
+  .fondo,
+  .contenido {
+    min-height: 600px;
+  }
+
+
+  footer {
+    padding: 14px 10px;
+
+    font-size: 13px;
+  }
+
+}
+
+
+/* ============================================================
+   TELÉFONOS MUY PEQUEÑOS
+============================================================ */
+
+@media (max-width: 380px) {
+
+  .menu > li > a,
+  .menu > li > .dd-toggle {
+    font-size: 14px;
+  }
+
+
+  .submenu a {
+    font-size: 13px;
+  }
+
+
+  footer {
+    font-size: 12px;
+  }
+
+}
+
+
+/* ============================================================
+   DESACTIVAR HOVER TEMPORALMENTE
+============================================================ */
+
 .nav.no-hover .has-sub:hover > .submenu,
 .nav.no-hover .has-sub:focus-within > .submenu {
   display: none !important;
