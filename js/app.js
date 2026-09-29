@@ -6,7 +6,7 @@ const BREAKPOINT_MOVIL = 900;
 
 
 /* ============================================================
-   DETERMINAR MODO MÓVIL / TABLET
+   DETERMINAR MODO MÓVIL
 ============================================================ */
 
 function esModoMovil() {
@@ -17,14 +17,153 @@ function esModoMovil() {
 
 
 /* ============================================================
-   CERRAR TODOS LOS SUBMENÚS
+   ABRIR SIDEBAR
 ============================================================ */
 
-function closeAllMenus() {
+function abrirSidebar() {
+
+  const sidebar =
+    document.getElementById("sidebar");
+
+  const overlay =
+    document.getElementById("sidebarOverlay");
+
+  const boton =
+    document.getElementById("menuToggle");
+
+
+  if (sidebar) {
+
+    sidebar.classList.add("activo");
+
+  }
+
+
+  if (overlay) {
+
+    overlay.classList.add("activo");
+
+  }
+
+
+  if (boton) {
+
+    boton.setAttribute(
+      "aria-expanded",
+      "true"
+    );
+
+    boton.setAttribute(
+      "aria-label",
+      "Cerrar menú de navegación"
+    );
+
+  }
+
+
+  document.body.style.overflow = "hidden";
+
+}
+
+
+/* ============================================================
+   CERRAR SIDEBAR
+============================================================ */
+
+function cerrarSidebar() {
+
+  const sidebar =
+    document.getElementById("sidebar");
+
+  const overlay =
+    document.getElementById("sidebarOverlay");
+
+  const boton =
+    document.getElementById("menuToggle");
+
+
+  if (sidebar) {
+
+    sidebar.classList.remove("activo");
+
+  }
+
+
+  if (overlay) {
+
+    overlay.classList.remove("activo");
+
+  }
+
+
+  if (boton) {
+
+    boton.setAttribute(
+      "aria-expanded",
+      "false"
+    );
+
+    boton.setAttribute(
+      "aria-label",
+      "Abrir menú de navegación"
+    );
+
+  }
+
+
+  document.body.style.overflow = "";
+
+}
+
+
+/* ============================================================
+   ALTERNAR SIDEBAR
+============================================================ */
+
+function toggleSidebar() {
+
+  const sidebar =
+    document.getElementById("sidebar");
+
+
+  if (!sidebar) {
+
+    return;
+
+  }
+
+
+  if (
+    sidebar.classList.contains("activo")
+  ) {
+
+    cerrarSidebar();
+
+  } else {
+
+    abrirSidebar();
+
+  }
+
+}
+
+
+/* ============================================================
+   CERRAR SUBMENÚS
+============================================================ */
+
+function cerrarSubmenus(excepto = null) {
 
   document
     .querySelectorAll(".has-sub.open")
     .forEach(item => {
+
+      if (item === excepto) {
+
+        return;
+
+      }
+
 
       item.classList.remove("open");
 
@@ -50,78 +189,25 @@ function closeAllMenus() {
 
 
 /* ============================================================
-   DESACTIVAR HOVER TEMPORALMENTE
+   MARCAR OPCIÓN ACTIVA
 ============================================================ */
 
-function disableHoverTemporarily() {
+function marcarActivo(elemento) {
 
-  const nav =
-    document.querySelector(".nav");
+  document
+    .querySelectorAll(
+      ".menu a.activo"
+    )
+    .forEach(link => {
 
+      link.classList.remove("activo");
 
-  if (!nav) {
-    return;
-  }
-
-
-  nav.classList.add("no-hover");
-
-
-  setTimeout(() => {
-
-    nav.classList.remove("no-hover");
-
-  }, 300);
-
-}
+    });
 
 
-/* ============================================================
-   ABRIR / CERRAR MENÚ PRINCIPAL MÓVIL
-============================================================ */
+  if (elemento) {
 
-function toggleMenuMovil() {
-
-  const menu =
-    document.getElementById("menu");
-
-
-  const boton =
-    document.getElementById("menuToggle");
-
-
-  if (!menu || !boton) {
-    return;
-  }
-
-
-  const abierto =
-    menu.classList.toggle("activo");
-
-
-  boton.classList.toggle(
-    "activo",
-    abierto
-  );
-
-
-  boton.setAttribute(
-    "aria-expanded",
-    String(abierto)
-  );
-
-
-  boton.setAttribute(
-    "aria-label",
-    abierto
-      ? "Cerrar menú de navegación"
-      : "Abrir menú de navegación"
-  );
-
-
-  if (!abierto) {
-
-    closeAllMenus();
+    elemento.classList.add("activo");
 
   }
 
@@ -129,52 +215,7 @@ function toggleMenuMovil() {
 
 
 /* ============================================================
-   CERRAR MENÚ MÓVIL
-============================================================ */
-
-function cerrarMenuMovil() {
-
-  const menu =
-    document.getElementById("menu");
-
-
-  const boton =
-    document.getElementById("menuToggle");
-
-
-  if (menu) {
-
-    menu.classList.remove("activo");
-
-  }
-
-
-  if (boton) {
-
-    boton.classList.remove("activo");
-
-
-    boton.setAttribute(
-      "aria-expanded",
-      "false"
-    );
-
-
-    boton.setAttribute(
-      "aria-label",
-      "Abrir menú de navegación"
-    );
-
-  }
-
-
-  closeAllMenus();
-
-}
-
-
-/* ============================================================
-   MOSTRAR PÁGINA DE INICIO
+   MOSTRAR INICIO
 ============================================================ */
 
 function mostrarInicio(e) {
@@ -189,22 +230,17 @@ function mostrarInicio(e) {
   const iframe =
     document.getElementById("contenido");
 
-
   const fondo =
     document.getElementById("fondo");
 
-
-  disableHoverTemporarily();
-
-
-  closeAllMenus();
+  const btnInicio =
+    document.getElementById("btnInicio");
 
 
-  if (esModoMovil()) {
+  cerrarSubmenus();
 
-    cerrarMenuMovil();
 
-  }
+  marcarActivo(btnInicio);
 
 
   if (iframe) {
@@ -219,6 +255,13 @@ function mostrarInicio(e) {
   if (fondo) {
 
     fondo.classList.remove("oculto");
+
+  }
+
+
+  if (esModoMovil()) {
+
+    cerrarSidebar();
 
   }
 
@@ -248,22 +291,27 @@ function cargarContenido(url, e) {
   const iframe =
     document.getElementById("contenido");
 
-
   const fondo =
     document.getElementById("fondo");
 
 
-  disableHoverTemporarily();
+  let enlace = null;
 
 
-  closeAllMenus();
+  if (
+    e &&
+    e.currentTarget
+  ) {
 
-
-  if (esModoMovil()) {
-
-    cerrarMenuMovil();
+    enlace = e.currentTarget;
 
   }
+
+
+  marcarActivo(enlace);
+
+
+  cerrarSubmenus();
 
 
   if (iframe) {
@@ -278,6 +326,13 @@ function cargarContenido(url, e) {
   if (fondo) {
 
     fondo.classList.add("oculto");
+
+  }
+
+
+  if (esModoMovil()) {
+
+    cerrarSidebar();
 
   }
 
@@ -301,108 +356,40 @@ function configurarSubmenus() {
         "click",
         e => {
 
+          e.preventDefault();
 
-          /*
-           * En escritorio se conserva
-           * el comportamiento mediante hover.
-           */
-
-          if (!esModoMovil()) {
-
-            return;
-
-          }
+          e.stopPropagation();
 
 
           const item =
             toggle.parentElement;
 
 
-          const submenu =
-            item.querySelector(
-              ":scope > .submenu"
-            );
-
-
-          if (!submenu) {
+          if (!item) {
 
             return;
 
           }
 
 
-          e.preventDefault();
-
-          e.stopPropagation();
-
-
-          const estaAbierto =
+          const estabaAbierto =
             item.classList.contains(
               "open"
             );
 
 
-          /*
-           * Cerrar elementos hermanos
-           * del mismo nivel.
-           */
+          cerrarSubmenus(item);
 
-          const padre =
-            item.parentElement;
-
-
-          if (padre) {
-
-            padre
-              .querySelectorAll(
-                ":scope > .has-sub"
-              )
-              .forEach(sibling => {
-
-
-                if (sibling !== item) {
-
-
-                  sibling.classList.remove(
-                    "open"
-                  );
-
-
-                  const siblingToggle =
-                    sibling.querySelector(
-                      ":scope > .dd-toggle"
-                    );
-
-
-                  if (siblingToggle) {
-
-                    siblingToggle.setAttribute(
-                      "aria-expanded",
-                      "false"
-                    );
-
-                  }
-
-                }
-
-              });
-
-          }
-
-
-          /*
-           * Abrir o cerrar seleccionado.
-           */
 
           item.classList.toggle(
             "open",
-            !estaAbierto
+            !estabaAbierto
           );
 
 
           toggle.setAttribute(
             "aria-expanded",
-            String(!estaAbierto)
+            String(!estabaAbierto)
           );
 
         }
@@ -414,49 +401,27 @@ function configurarSubmenus() {
 
 
 /* ============================================================
-   CLIC FUERA DEL MENÚ
+   LINKS NORMALES
 ============================================================ */
 
-function configurarClickExterior() {
-
-  document.addEventListener(
-    "click",
-    e => {
-
-
-      if (
-        !e.target.closest(".nav")
-      ) {
-
-
-        closeAllMenus();
-
-
-        if (esModoMovil()) {
-
-          cerrarMenuMovil();
-
-        }
-
-      }
-
-    }
-  );
-
-}
-
-
-/* ============================================================
-   LINKS DE LOS SUBMENÚS
-============================================================ */
-
-function configurarLinksSubmenu() {
+function configurarLinks() {
 
   document
     .querySelectorAll(
-      ".submenu a"
+      ".menu a"
     )
     .forEach(link => {
+
+
+      if (
+        link.classList.contains(
+          "dd-toggle"
+        )
+      ) {
+
+        return;
+
+      }
 
 
       link.addEventListener(
@@ -464,14 +429,20 @@ function configurarLinksSubmenu() {
         () => {
 
 
+          const onclick =
+            link.getAttribute("onclick");
+
+
           /*
-           * Si este enlace abre otro
-           * submenú, no cerramos todavía.
+           * Los enlaces que utilizan
+           * cargarContenido() ya se
+           * gestionan desde esa función.
            */
 
           if (
-            link.classList.contains(
-              "dd-toggle"
+            onclick &&
+            onclick.includes(
+              "cargarContenido"
             )
           ) {
 
@@ -480,31 +451,33 @@ function configurarLinksSubmenu() {
           }
 
 
-          const href =
-            link.getAttribute("href") || "";
-
-
           /*
-           * Enlaces normales.
+           * Inicio se gestiona desde
+           * mostrarInicio().
            */
 
           if (
-            href !== "#" &&
-            href.trim() !== ""
+            link.id === "btnInicio"
           ) {
 
+            return;
 
-            disableHoverTemporarily();
-
-
-            closeAllMenus();
+          }
 
 
-            if (esModoMovil()) {
+          /*
+           * Enlaces externos.
+           */
 
-              cerrarMenuMovil();
+          marcarActivo(link);
 
-            }
+
+          cerrarSubmenus();
+
+
+          if (esModoMovil()) {
+
+            cerrarSidebar();
 
           }
 
@@ -517,86 +490,27 @@ function configurarLinksSubmenu() {
 
 
 /* ============================================================
-   CONTROL DE CAMBIO DE TAMAÑO
+   OVERLAY
 ============================================================ */
 
-function configurarResize() {
+function configurarOverlay() {
 
-  let ultimoModoMovil =
-    esModoMovil();
-
-
-  window.addEventListener(
-    "resize",
-    () => {
+  const overlay =
+    document.getElementById(
+      "sidebarOverlay"
+    );
 
 
-      const modoActual =
-        esModoMovil();
+  if (!overlay) {
+
+    return;
+
+  }
 
 
-      /*
-       * Solamente reiniciamos el menú
-       * cuando se cruza el breakpoint.
-       */
-
-      if (
-        modoActual !== ultimoModoMovil
-      ) {
-
-
-        closeAllMenus();
-
-
-        const menu =
-          document.getElementById(
-            "menu"
-          );
-
-
-        const boton =
-          document.getElementById(
-            "menuToggle"
-          );
-
-
-        if (menu) {
-
-          menu.classList.remove(
-            "activo"
-          );
-
-        }
-
-
-        if (boton) {
-
-
-          boton.classList.remove(
-            "activo"
-          );
-
-
-          boton.setAttribute(
-            "aria-expanded",
-            "false"
-          );
-
-
-          boton.setAttribute(
-            "aria-label",
-            "Abrir menú de navegación"
-          );
-
-        }
-
-
-        ultimoModoMovil =
-          modoActual;
-
-      }
-
-    }
+  overlay.addEventListener(
+    "click",
+    cerrarSidebar
   );
 
 }
@@ -614,20 +528,64 @@ function configurarEscape() {
 
 
       if (
-        e.key === "Escape"
+        e.key !== "Escape"
       ) {
 
-
-        closeAllMenus();
-
-
-        if (esModoMovil()) {
-
-          cerrarMenuMovil();
-
-        }
+        return;
 
       }
+
+
+      cerrarSubmenus();
+
+
+      if (esModoMovil()) {
+
+        cerrarSidebar();
+
+      }
+
+    }
+  );
+
+}
+
+
+/* ============================================================
+   CAMBIO DE TAMAÑO
+============================================================ */
+
+function configurarResize() {
+
+  let modoAnterior =
+    esModoMovil();
+
+
+  window.addEventListener(
+    "resize",
+    () => {
+
+
+      const modoActual =
+        esModoMovil();
+
+
+      if (
+        modoActual === modoAnterior
+      ) {
+
+        return;
+
+      }
+
+
+      cerrarSidebar();
+
+      cerrarSubmenus();
+
+
+      modoAnterior =
+        modoActual;
 
     }
   );
@@ -657,7 +615,7 @@ document.addEventListener(
 
 
     /* ========================================================
-       BOTÓN INICIO
+       INICIO
     ======================================================== */
 
     if (btnInicio) {
@@ -667,11 +625,21 @@ document.addEventListener(
         mostrarInicio
       );
 
+
+      /*
+       * Inicio aparece seleccionado
+       * al cargar el sistema.
+       */
+
+      btnInicio.classList.add(
+        "activo"
+      );
+
     }
 
 
     /* ========================================================
-       BOTÓN HAMBURGUESA
+       BOTÓN MENÚ MÓVIL
     ======================================================== */
 
     if (menuToggle) {
@@ -680,13 +648,12 @@ document.addEventListener(
         "click",
         e => {
 
-
           e.preventDefault();
 
           e.stopPropagation();
 
 
-          toggleMenuMovil();
+          toggleSidebar();
 
         }
       );
@@ -700,13 +667,13 @@ document.addEventListener(
 
     configurarSubmenus();
 
-    configurarClickExterior();
+    configurarLinks();
 
-    configurarLinksSubmenu();
-
-    configurarResize();
+    configurarOverlay();
 
     configurarEscape();
+
+    configurarResize();
 
   }
 );

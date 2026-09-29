@@ -1,5 +1,5 @@
 /* ============================================================
-   RESETEO Y BASE
+   RESETEO
 ============================================================ */
 
 * {
@@ -26,9 +26,9 @@ body {
 
   font-family: "Segoe UI", Arial, sans-serif;
 
-  color: #fff;
-
   background: #fff;
+
+  color: #0f172a;
 
   overflow-x: hidden;
 }
@@ -42,6 +42,8 @@ header {
   width: 100%;
 
   flex: 0 0 auto;
+
+  background: #fff;
 
   overflow: hidden;
 }
@@ -63,70 +65,236 @@ header .logo img {
 
 
 /* ============================================================
-   NAV
+   LAYOUT
 ============================================================ */
 
-.nav {
+.layout {
   position: relative;
 
   width: 100%;
 
-  flex: 0 0 auto;
-
-  z-index: 100;
-
-  background: #0B1F4D;
-
-  color: #D4AF37;
-}
-
-
-/* ============================================================
-   CONTENEDOR NAV
-============================================================ */
-
-.nav-wrap {
-  position: relative;
-
-  width: 100%;
-  max-width: 1200px;
-
-  margin: 0 auto;
-
-  padding: 8px 16px;
+  flex: 1 1 auto;
 
   display: flex;
 
-  justify-content: center;
+  align-items: stretch;
 
-  align-items: center;
+  min-height: 600px;
+
+  background: #fff;
 }
 
 
 /* ============================================================
-   MENÚ PRINCIPAL
+   SIDEBAR
+============================================================ */
+
+.sidebar {
+  position: relative;
+
+  width: 320px;
+  min-width: 320px;
+
+  flex: 0 0 320px;
+
+  background:
+    linear-gradient(
+      180deg,
+      #0B1F4D 0%,
+      #091b43 55%,
+      #071737 100%
+    );
+
+  color: #D4AF37;
+
+  z-index: 100;
+
+  border-right:
+    1px solid
+    rgba(212, 175, 55, 0.25);
+
+  box-shadow:
+    5px 0 20px
+    rgba(2, 8, 23, 0.10);
+}
+
+
+/* ============================================================
+   ENCABEZADO DEL SIDEBAR
+============================================================ */
+
+.sidebar-header {
+  width: 100%;
+
+  min-height: 82px;
+
+  padding: 16px 17px 13px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+
+  background:
+    rgba(255, 255, 255, 0.025);
+}
+
+
+.sidebar-header-icon {
+  width: 42px;
+  height: 42px;
+
+  flex: 0 0 42px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border:
+    1px solid
+    rgba(212, 175, 55, 0.55);
+
+  border-radius: 11px;
+
+  color: #D4AF37;
+
+  font-size: 22px;
+
+  background:
+    rgba(212, 175, 55, 0.08);
+
+  box-shadow:
+    inset 0 0 12px
+    rgba(212, 175, 55, 0.04);
+}
+
+
+.sidebar-header-text {
+  min-width: 0;
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 3px;
+}
+
+
+.sidebar-header-text strong {
+  color: #fff;
+
+  font-size: 15px;
+
+  font-weight: 600;
+
+  line-height: 1.25;
+}
+
+
+.sidebar-header-text span {
+  color:
+    rgba(212, 175, 55, 0.88);
+
+  font-size: 11px;
+
+  font-weight: 400;
+
+  letter-spacing: 0.4px;
+}
+
+
+/* ============================================================
+   LÍNEA DORADA
+============================================================ */
+
+.sidebar-line {
+  width:
+    calc(100% - 32px);
+
+  height: 1px;
+
+  margin: 0 16px;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(212, 175, 55, 0.75),
+      transparent
+    );
+}
+
+
+/* ============================================================
+   NAVEGACIÓN
+============================================================ */
+
+.sidebar-nav {
+  width: 100%;
+
+  max-height:
+    calc(100vh - 120px);
+
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  padding:
+    11px 9px 24px;
+
+  scrollbar-width: thin;
+
+  scrollbar-color:
+    rgba(212, 175, 55, 0.48)
+    transparent;
+}
+
+
+/* ============================================================
+   SCROLLBAR
+============================================================ */
+
+.sidebar-nav::-webkit-scrollbar {
+  width: 5px;
+}
+
+
+.sidebar-nav::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+
+.sidebar-nav::-webkit-scrollbar-thumb {
+  background:
+    rgba(212, 175, 55, 0.48);
+
+  border-radius: 20px;
+}
+
+
+.sidebar-nav::-webkit-scrollbar-thumb:hover {
+  background: #D4AF37;
+}
+
+
+/* ============================================================
+   MENÚ
 ============================================================ */
 
 .menu {
   width: 100%;
 
   list-style: none;
-
-  display: flex;
-
-  flex-wrap: wrap;
-
-  justify-content: center;
-
-  align-items: center;
-
-  gap: 70px;
 }
 
 
-.menu > li,
-.has-sub {
+.menu > li {
   position: relative;
+
+  width: 100%;
+
+  margin: 2px 0;
 }
 
 
@@ -134,104 +302,202 @@ header .logo img {
    ENLACES PRINCIPALES
 ============================================================ */
 
-.menu > li > a,
-.menu > li > .dd-toggle {
-  display: inline-block;
+.menu > li > a {
+  position: relative;
 
-  padding: 6px 10px 16px;
+  display: flex;
 
-  color: #D4AF37;
+  width: 100%;
 
-  font-size: 16px;
+  min-height: 45px;
 
-  font-weight: 500;
-
-  text-decoration: none;
-
-  border-radius: 10px;
-
-  transition:
-    background 0.25s ease,
-    color 0.25s ease;
-
-  cursor: pointer;
-}
-
-
-.menu > li > a:hover,
-.menu > li > .dd-toggle:hover,
-.has-sub.open > .dd-toggle {
-  background: rgba(255, 255, 255, 0.08);
-}
-
-
-/* ============================================================
-   BOTÓN HAMBURGUESA
-============================================================ */
-
-.menu-toggle {
-  display: none;
-
-  width: 46px;
-  height: 42px;
-
-  padding: 8px;
-
-  border: 1px solid rgba(212, 175, 55, 0.45);
-
-  border-radius: 9px;
-
-  background: transparent;
-
-  cursor: pointer;
+  padding: 10px 12px;
 
   align-items: center;
 
-  justify-content: center;
+  justify-content: space-between;
 
-  flex-direction: column;
+  gap: 10px;
 
-  gap: 5px;
-}
+  color:
+    rgba(235, 205, 106, 0.94);
 
+  font-size: 13.5px;
 
-.menu-toggle:hover {
-  background: rgba(255, 255, 255, 0.08);
-}
+  font-weight: 500;
 
+  line-height: 1.35;
 
-.menu-toggle span {
-  display: block;
+  text-decoration: none;
 
-  width: 24px;
-  height: 2px;
+  border-radius: 8px;
 
-  background: #D4AF37;
-
-  border-radius: 10px;
+  border:
+    1px solid transparent;
 
   transition:
-    transform 0.25s ease,
-    opacity 0.25s ease;
+    background 0.20s ease,
+    color 0.20s ease,
+    border-color 0.20s ease,
+    transform 0.20s ease,
+    box-shadow 0.20s ease;
+
+  cursor: pointer;
 }
 
 
 /* ============================================================
-   HAMBURGUESA ABIERTA
+   HOVER
 ============================================================ */
 
-.menu-toggle.activo span:nth-child(1) {
-  transform: translateY(7px) rotate(45deg);
+.menu > li > a:hover {
+  color: #fff;
+
+  background:
+    rgba(255, 255, 255, 0.075);
+
+  border-color:
+    rgba(212, 175, 55, 0.12);
+
+  transform:
+    translateX(2px);
 }
 
 
-.menu-toggle.activo span:nth-child(2) {
-  opacity: 0;
+/* ============================================================
+   OPCIÓN ACTIVA
+============================================================ */
+
+.menu > li > a.activo {
+  color: #fff;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(212, 175, 55, 0.17),
+      rgba(212, 175, 55, 0.055)
+    );
+
+  border-color:
+    rgba(212, 175, 55, 0.18);
+
+  box-shadow:
+    0 4px 12px
+    rgba(0, 0, 0, 0.08);
 }
 
 
-.menu-toggle.activo span:nth-child(3) {
-  transform: translateY(-7px) rotate(-45deg);
+/* ============================================================
+   BARRA DORADA OPCIÓN ACTIVA
+============================================================ */
+
+.menu > li > a.activo::before {
+  content: "";
+
+  position: absolute;
+
+  left: -9px;
+  top: 7px;
+  bottom: 7px;
+
+  width: 4px;
+
+  border-radius:
+    0 5px 5px 0;
+
+  background: #D4AF37;
+
+  box-shadow:
+    0 0 8px
+    rgba(212, 175, 55, 0.30);
+}
+
+
+/* ============================================================
+   CONTENIDO DE CADA OPCIÓN
+============================================================ */
+
+.menu-contenido {
+  min-width: 0;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+}
+
+
+.menu-contenido > span:last-child {
+  min-width: 0;
+
+  overflow-wrap: break-word;
+}
+
+
+/* ============================================================
+   ICONOS
+============================================================ */
+
+.menu-icon {
+  width: 25px;
+  min-width: 25px;
+  height: 25px;
+
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  color: #D4AF37;
+
+  font-size: 17px;
+
+  line-height: 1;
+
+  opacity: 0.95;
+
+  transition:
+    transform 0.20s ease,
+    color 0.20s ease;
+}
+
+
+.menu > li > a:hover .menu-icon,
+.menu > li > a.activo .menu-icon {
+  color: #fff;
+
+  transform:
+    scale(1.07);
+}
+
+
+/* ============================================================
+   FLECHA
+============================================================ */
+
+.flecha {
+  flex: 0 0 auto;
+
+  color: #D4AF37;
+
+  font-size: 20px;
+
+  line-height: 1;
+
+  transition:
+    transform 0.25s ease,
+    color 0.25s ease;
+}
+
+
+.has-sub.open >
+.dd-toggle
+.flecha {
+  transform:
+    rotate(90deg);
+
+  color: #fff;
 }
 
 
@@ -240,51 +506,70 @@ header .logo img {
 ============================================================ */
 
 .submenu {
-  position: absolute;
+  display: none;
 
-  top: 100%;
-  left: 0;
+  width:
+    calc(100% - 10px);
 
-  min-width: 280px;
+  margin:
+    4px 0 7px 10px;
 
-  padding: 6px;
+  padding:
+    5px 0 5px 11px;
 
   list-style: none;
 
-  background: #fff;
+  border-left:
+    2px solid
+    rgba(212, 175, 55, 0.50);
 
-  color: #0f172a;
+  background:
+    rgba(0, 0, 0, 0.08);
 
-  border: 1px solid #e2e8f0;
+  border-radius:
+    0 7px 7px 0;
+}
 
-  border-radius: 12px;
 
-  box-shadow:
-    0 10px 24px rgba(2, 8, 23, 0.15);
+.has-sub.open >
+.submenu {
+  display: block;
 
-  display: none;
-
-  z-index: 999;
+  animation:
+    abrirSubmenu
+    0.22s ease;
 }
 
 
 /* ============================================================
-   ABRIR SUBMENÚ EN ESCRITORIO
+   ANIMACIÓN SUBMENÚ
 ============================================================ */
 
-.has-sub:hover > .submenu,
-.has-sub:focus-within > .submenu,
-.has-sub.open > .submenu {
-  display: block;
+@keyframes abrirSubmenu {
+
+  from {
+    opacity: 0;
+
+    transform:
+      translateY(-4px);
+  }
+
+  to {
+    opacity: 1;
+
+    transform:
+      translateY(0);
+  }
+
 }
 
 
 /* ============================================================
-   ELEMENTOS DEL SUBMENÚ
+   LINKS SUBMENÚ
 ============================================================ */
 
 .submenu li {
-  position: relative;
+  width: 100%;
 }
 
 
@@ -293,42 +578,35 @@ header .logo img {
 
   width: 100%;
 
-  padding: 10px 12px;
+  padding: 9px 10px;
 
-  color: inherit;
+  color:
+    rgba(255, 255, 255, 0.83);
+
+  font-size: 12.5px;
+
+  font-weight: 400;
+
+  line-height: 1.4;
 
   text-decoration: none;
 
-  font-weight: 600;
+  border-radius: 6px;
 
-  border-radius: 8px;
-
-  transition: background 0.25s ease;
-
-  text-align: left;
-
-  line-height: 1.35;
+  transition:
+    color 0.20s ease,
+    background 0.20s ease,
+    padding-left 0.20s ease;
 }
 
 
-.submenu a:hover,
-.submenu .has-sub.open > .dd-toggle {
-  background: #f1f5f9;
-}
+.submenu a:hover {
+  color: #fff;
 
+  background:
+    rgba(212, 175, 55, 0.10);
 
-/* ============================================================
-   SUB-SUBMENÚ
-============================================================ */
-
-.submenu .submenu {
-  top: 0;
-
-  left: calc(100% + 6px);
-
-  min-width: 320px;
-
-  z-index: 1000;
+  padding-left: 14px;
 }
 
 
@@ -339,7 +617,7 @@ header .logo img {
 main {
   position: relative;
 
-  width: 100%;
+  min-width: 0;
 
   flex: 1 1 auto;
 
@@ -401,25 +679,132 @@ main {
 
 
 /* ============================================================
+   BARRA MÓVIL
+============================================================ */
+
+.barra-movil {
+  display: none;
+
+  width: 100%;
+
+  padding: 7px 12px;
+
+  background:
+    linear-gradient(
+      90deg,
+      #0B1F4D,
+      #091b43
+    );
+
+  border-top:
+    1px solid
+    rgba(212, 175, 55, 0.20);
+
+  border-bottom:
+    1px solid
+    rgba(212, 175, 55, 0.25);
+
+  z-index: 300;
+}
+
+
+/* ============================================================
+   BOTÓN HAMBURGUESA
+============================================================ */
+
+.menu-toggle {
+  display: flex;
+
+  min-height: 42px;
+
+  padding: 8px 12px;
+
+  align-items: center;
+
+  gap: 5px;
+
+  border:
+    1px solid
+    rgba(212, 175, 55, 0.42);
+
+  border-radius: 8px;
+
+  background:
+    rgba(255, 255, 255, 0.025);
+
+  color: #D4AF37;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease;
+}
+
+
+.menu-toggle:hover {
+  background:
+    rgba(255, 255, 255, 0.08);
+
+  border-color:
+    rgba(212, 175, 55, 0.75);
+}
+
+
+.menu-toggle span {
+  display: block;
+
+  width: 22px;
+  height: 2px;
+
+  background: #D4AF37;
+
+  border-radius: 10px;
+}
+
+
+.menu-toggle strong {
+  margin-left: 7px;
+
+  font-size: 14px;
+
+  font-weight: 500;
+}
+
+
+/* ============================================================
+   OVERLAY
+============================================================ */
+
+.sidebar-overlay {
+  display: none;
+}
+
+
+/* ============================================================
    FOOTER
 ============================================================ */
 
 footer {
+  position: relative;
+
   width: 100%;
 
   flex: 0 0 auto;
 
-  text-align: center;
+  padding: 18px 15px;
 
-  padding: 20px;
+  text-align: center;
 
   background: #0B1F4D;
 
   color: #D4AF37;
 
-  font-weight: 400;
+  font-size: 14px;
 
   line-height: 1.5;
+
+  z-index: 200;
 }
 
 
@@ -429,177 +814,104 @@ footer {
 
 @media (max-width: 900px) {
 
-
-  /* ========================================================
-     NAV WRAP
-  ======================================================== */
-
-  .nav-wrap {
-    padding: 8px 12px;
-
+  .barra-movil {
     display: flex;
 
-    flex-wrap: wrap;
-
-    justify-content: flex-end;
+    justify-content:
+      flex-start;
 
     align-items: center;
   }
 
 
-  /* ========================================================
-     MOSTRAR HAMBURGUESA
-  ======================================================== */
-
-  .menu-toggle {
-    display: flex;
-  }
-
-
-  /* ========================================================
-     MENÚ PRINCIPAL
-  ======================================================== */
-
-  .menu {
-    display: none;
-
-    width: 100%;
-
-    margin-top: 8px;
-
-    padding: 5px 0 10px;
-
-    flex-direction: column;
-
-    flex-wrap: nowrap;
-
-    align-items: stretch;
-
-    justify-content: flex-start;
-
-    gap: 2px;
-  }
-
-
-  .menu.activo {
-    display: flex;
-  }
-
-
-  .menu > li {
-    width: 100%;
-  }
-
-
-  .menu > li > a,
-  .menu > li > .dd-toggle {
+  .layout {
     display: block;
 
-    width: 100%;
-
-    padding: 13px 14px;
-
-    font-size: 15px;
-
-    text-align: left;
-
-    border-radius: 8px;
+    min-height: 650px;
   }
 
 
   /* ========================================================
-     DESACTIVAR HOVER MÓVIL
+     SIDEBAR MÓVIL
   ======================================================== */
 
-  .has-sub:hover > .submenu,
-  .has-sub:focus-within > .submenu {
-    display: none;
-  }
+  .sidebar {
+    position: fixed;
 
+    top: 0;
+    left: 0;
 
-  /* ========================================================
-     ABRIR SOLAMENTE CON .OPEN
-  ======================================================== */
-
-  .has-sub.open > .submenu {
-    display: block;
-  }
-
-
-  /* ========================================================
-     SUBMENÚ MÓVIL
-  ======================================================== */
-
-  .submenu {
-    position: static;
-
-    top: auto;
-    left: auto;
-
-    width: 100%;
+    width:
+      min(340px, 88vw);
 
     min-width: 0;
 
-    max-width: 100%;
+    height: 100vh;
+    height: 100dvh;
 
-    margin: 2px 0 6px;
+    transform:
+      translateX(-105%);
 
-    padding: 5px;
+    transition:
+      transform 0.28s ease;
 
-    border: none;
+    box-shadow:
+      10px 0 30px
+      rgba(0, 0, 0, 0.30);
 
-    border-radius: 8px;
+    z-index: 1000;
+  }
 
-    box-shadow: none;
 
-    background: #fff;
+  .sidebar.activo {
+    transform:
+      translateX(0);
+  }
+
+
+  .sidebar-nav {
+    height:
+      calc(100% - 84px);
+
+    max-height: none;
+
+    padding-bottom: 25px;
   }
 
 
   /* ========================================================
-     SUB-SUBMENÚ MÓVIL
+     OVERLAY
   ======================================================== */
 
-  .submenu .submenu {
-    position: static;
+  .sidebar-overlay {
+    position: fixed;
 
-    top: auto;
-    left: auto;
+    inset: 0;
 
-    width: 100%;
+    display: block;
 
-    min-width: 0;
+    background:
+      rgba(2, 8, 23, 0.56);
 
-    max-width: 100%;
+    backdrop-filter:
+      blur(2px);
 
-    margin-top: 4px;
+    opacity: 0;
 
-    padding-left: 12px;
+    visibility: hidden;
 
-    border-left: 3px solid #D4AF37;
+    transition:
+      opacity 0.25s ease,
+      visibility 0.25s ease;
 
-    border-radius: 5px;
+    z-index: 900;
   }
 
 
-  /* ========================================================
-     LINKS MÓVILES
-  ======================================================== */
+  .sidebar-overlay.activo {
+    opacity: 1;
 
-  .submenu a {
-    width: 100%;
-
-    padding: 11px 12px;
-
-    white-space: normal;
-
-    overflow-wrap: anywhere;
-
-    word-break: normal;
-
-    font-size: 14px;
-
-    line-height: 1.4;
+    visibility: visible;
   }
 
 
@@ -608,6 +920,8 @@ footer {
   ======================================================== */
 
   main {
+    width: 100%;
+
     min-height: 650px;
   }
 
@@ -618,48 +932,47 @@ footer {
   }
 
 
-  /* ========================================================
-     FOOTER
-  ======================================================== */
+  .menu > li > a {
+    min-height: 46px;
 
-  footer {
-    padding: 16px 12px;
+    padding: 11px 12px;
 
     font-size: 14px;
-  }
-
-}
-
-
-/* ============================================================
-   TELÉFONOS
-============================================================ */
-
-@media (max-width: 600px) {
-
-  .nav-wrap {
-    padding: 8px 10px;
-  }
-
-
-  .menu-toggle {
-    width: 44px;
-    height: 40px;
-  }
-
-
-  .menu > li > a,
-  .menu > li > .dd-toggle {
-    padding: 12px;
-
-    font-size: 15px;
   }
 
 
   .submenu a {
     padding: 10px;
 
-    font-size: 14px;
+    font-size: 13px;
+  }
+
+}
+
+
+/* ============================================================
+   CELULAR
+============================================================ */
+
+@media (max-width: 600px) {
+
+  .barra-movil {
+    padding: 7px 10px;
+  }
+
+
+  .sidebar {
+    width: 88vw;
+
+    max-width: 330px;
+  }
+
+
+  .sidebar-header {
+    min-height: 78px;
+
+    padding:
+      14px 15px 12px;
   }
 
 
@@ -684,19 +997,23 @@ footer {
 
 
 /* ============================================================
-   TELÉFONOS MUY PEQUEÑOS
+   CELULAR PEQUEÑO
 ============================================================ */
 
 @media (max-width: 380px) {
 
-  .menu > li > a,
-  .menu > li > .dd-toggle {
-    font-size: 14px;
+  .sidebar {
+    width: 91vw;
+  }
+
+
+  .menu > li > a {
+    font-size: 13px;
   }
 
 
   .submenu a {
-    font-size: 13px;
+    font-size: 12px;
   }
 
 
@@ -704,14 +1021,4 @@ footer {
     font-size: 12px;
   }
 
-}
-
-
-/* ============================================================
-   DESACTIVAR HOVER TEMPORALMENTE
-============================================================ */
-
-.nav.no-hover .has-sub:hover > .submenu,
-.nav.no-hover .has-sub:focus-within > .submenu {
-  display: none !important;
 }
