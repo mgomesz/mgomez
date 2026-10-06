@@ -8,16 +8,13 @@
   padding: 0;
 }
 
-
 html {
   width: 100%;
   min-height: 100%;
 }
 
-
 body {
   width: 100%;
-
   min-height: 100vh;
   min-height: 100dvh;
 
@@ -27,7 +24,6 @@ body {
   font-family: "Segoe UI", Arial, sans-serif;
 
   background: #fff;
-
   color: #0f172a;
 
   overflow-x: hidden;
@@ -39,6 +35,8 @@ body {
 ============================================================ */
 
 header {
+  position: relative;
+
   width: 100%;
 
   flex: 0 0 auto;
@@ -48,11 +46,9 @@ header {
   overflow: hidden;
 }
 
-
 header .logo {
   width: 100%;
 }
-
 
 header .logo img {
   display: block;
@@ -61,6 +57,210 @@ header .logo img {
   height: auto;
 
   object-fit: cover;
+}
+
+
+/* ============================================================
+   SESIÓN EN EL ENCABEZADO
+   MISMA POSICIÓN - TAMAÑO LIGERAMENTE MAYOR
+============================================================ */
+
+.sesion-superior {
+  position: absolute;
+
+  /* POSICIÓN QUE YA QUEDÓ CORRECTA */
+  right: 11px;
+  bottom: 3px;
+
+  /* Reserva espacio para el escudo */
+  transform: translateX(-145px);
+
+  display: flex;
+  align-items: center;
+
+  gap: 6px;
+
+  min-height: 34px;
+
+  padding: 4px 6px 4px 9px;
+
+  background: rgba(255, 255, 255, 0.98);
+
+  border: 1px solid rgba(11, 31, 77, 0.13);
+
+  border-radius: 7px;
+
+  box-shadow:
+    0 2px 7px rgba(15, 23, 42, 0.09);
+
+  z-index: 500;
+}
+
+
+/* ============================================================
+   INFORMACIÓN DE SESIÓN
+============================================================ */
+
+.sesion-superior-usuario {
+  display: flex;
+  align-items: center;
+
+  gap: 6px;
+
+  min-width: 0;
+}
+
+
+/* Punto verde */
+
+.sesion-superior-punto {
+  width: 7px;
+  height: 7px;
+
+  flex: 0 0 7px;
+
+  border-radius: 50%;
+
+  background: #22c55e;
+
+  box-shadow:
+    0 0 5px rgba(34, 197, 94, 0.45);
+}
+
+
+/* Contenedor de los textos */
+
+.sesion-superior-datos {
+  display: flex;
+  flex-direction: column;
+
+  justify-content: center;
+
+  gap: 1px;
+
+  min-width: 0;
+}
+
+
+/* SESIÓN INICIADA
+   Más grande, oscura y visible
+*/
+
+.sesion-superior-datos span {
+  color: #334155;
+
+  font-size: 9px;
+
+  font-weight: 600;
+
+  line-height: 1.1;
+}
+
+
+/* CORREO DEL USUARIO */
+
+.sesion-superior-datos strong {
+  display: block;
+
+  max-width: 125px;
+
+  overflow: hidden;
+
+  color: #0B1F4D;
+
+  font-size: 9px;
+
+  font-weight: 600;
+
+  line-height: 1.15;
+
+  text-overflow: ellipsis;
+
+  white-space: nowrap;
+}
+
+
+/* ============================================================
+   SEPARADOR DE SESIÓN
+============================================================ */
+
+.sesion-separador {
+  width: 1px;
+
+  align-self: stretch;
+
+  margin: 2px 0;
+
+  background: rgba(11, 31, 77, 0.10);
+}
+
+
+/* ============================================================
+   BOTÓN CERRAR SESIÓN
+============================================================ */
+
+.btn-cerrar-sesion-superior {
+  min-height: 27px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 4px;
+
+  padding: 4px 9px;
+
+  border: 1px solid #D4AF37;
+
+  border-radius: 6px;
+
+  background: #0B1F4D;
+
+  color: #fff;
+
+  font-family: inherit;
+
+  font-size: 8.5px;
+
+  font-weight: 500;
+
+  line-height: 1;
+
+  white-space: nowrap;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.btn-cerrar-sesion-superior:hover {
+  background: #D4AF37;
+
+  border-color: #D4AF37;
+
+  color: #0B1F4D;
+
+  transform: translateY(-1px);
+
+  box-shadow:
+    0 3px 8px rgba(11, 31, 77, 0.14);
+}
+
+.icono-salir {
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  font-size: 11px;
+
+  line-height: 1;
 }
 
 
@@ -110,17 +310,15 @@ header .logo img {
   z-index: 100;
 
   border-right:
-    1px solid
-    rgba(212, 175, 55, 0.25);
+    1px solid rgba(212, 175, 55, 0.25);
 
   box-shadow:
-    5px 0 20px
-    rgba(2, 8, 23, 0.10);
+    5px 0 20px rgba(2, 8, 23, 0.10);
 }
 
 
 /* ============================================================
-   ENCABEZADO DEL SIDEBAR
+   ENCABEZADO SIDEBAR
 ============================================================ */
 
 .sidebar-header {
@@ -136,10 +334,8 @@ header .logo img {
 
   gap: 12px;
 
-  background:
-    rgba(255, 255, 255, 0.025);
+  background: rgba(255, 255, 255, 0.025);
 }
-
 
 .sidebar-header-icon {
   width: 42px;
@@ -152,9 +348,7 @@ header .logo img {
   align-items: center;
   justify-content: center;
 
-  border:
-    1px solid
-    rgba(212, 175, 55, 0.55);
+  border: 1px solid rgba(212, 175, 55, 0.55);
 
   border-radius: 11px;
 
@@ -162,14 +356,8 @@ header .logo img {
 
   font-size: 22px;
 
-  background:
-    rgba(212, 175, 55, 0.08);
-
-  box-shadow:
-    inset 0 0 12px
-    rgba(212, 175, 55, 0.04);
+  background: rgba(212, 175, 55, 0.08);
 }
-
 
 .sidebar-header-text {
   min-width: 0;
@@ -181,7 +369,6 @@ header .logo img {
   gap: 3px;
 }
 
-
 .sidebar-header-text strong {
   color: #fff;
 
@@ -192,10 +379,8 @@ header .logo img {
   line-height: 1.25;
 }
 
-
 .sidebar-header-text span {
-  color:
-    rgba(212, 175, 55, 0.88);
+  color: rgba(212, 175, 55, 0.88);
 
   font-size: 11px;
 
@@ -210,8 +395,7 @@ header .logo img {
 ============================================================ */
 
 .sidebar-line {
-  width:
-    calc(100% - 32px);
+  width: calc(100% - 32px);
 
   height: 1px;
 
@@ -234,14 +418,12 @@ header .logo img {
 .sidebar-nav {
   width: 100%;
 
-  max-height:
-    calc(100vh - 120px);
+  max-height: calc(100vh - 120px);
 
   overflow-y: auto;
   overflow-x: hidden;
 
-  padding:
-    11px 9px 24px;
+  padding: 11px 9px 24px;
 
   scrollbar-width: thin;
 
@@ -250,28 +432,19 @@ header .logo img {
     transparent;
 }
 
-
-/* ============================================================
-   SCROLLBAR
-============================================================ */
-
 .sidebar-nav::-webkit-scrollbar {
   width: 5px;
 }
-
 
 .sidebar-nav::-webkit-scrollbar-track {
   background: transparent;
 }
 
-
 .sidebar-nav::-webkit-scrollbar-thumb {
-  background:
-    rgba(212, 175, 55, 0.48);
+  background: rgba(212, 175, 55, 0.48);
 
   border-radius: 20px;
 }
-
 
 .sidebar-nav::-webkit-scrollbar-thumb:hover {
   background: #D4AF37;
@@ -288,7 +461,6 @@ header .logo img {
   list-style: none;
 }
 
-
 .menu > li {
   position: relative;
 
@@ -296,11 +468,6 @@ header .logo img {
 
   margin: 2px 0;
 }
-
-
-/* ============================================================
-   ENLACES PRINCIPALES
-============================================================ */
 
 .menu > li > a {
   position: relative;
@@ -319,8 +486,7 @@ header .logo img {
 
   gap: 10px;
 
-  color:
-    rgba(235, 205, 106, 0.94);
+  color: rgba(235, 205, 106, 0.94);
 
   font-size: 13.5px;
 
@@ -332,8 +498,7 @@ header .logo img {
 
   border-radius: 8px;
 
-  border:
-    1px solid transparent;
+  border: 1px solid transparent;
 
   transition:
     background 0.20s ease,
@@ -345,28 +510,15 @@ header .logo img {
   cursor: pointer;
 }
 
-
-/* ============================================================
-   HOVER
-============================================================ */
-
 .menu > li > a:hover {
   color: #fff;
 
-  background:
-    rgba(255, 255, 255, 0.075);
+  background: rgba(255, 255, 255, 0.075);
 
-  border-color:
-    rgba(212, 175, 55, 0.12);
+  border-color: rgba(212, 175, 55, 0.12);
 
-  transform:
-    translateX(2px);
+  transform: translateX(2px);
 }
-
-
-/* ============================================================
-   OPCIÓN ACTIVA
-============================================================ */
 
 .menu > li > a.activo {
   color: #fff;
@@ -378,18 +530,11 @@ header .logo img {
       rgba(212, 175, 55, 0.055)
     );
 
-  border-color:
-    rgba(212, 175, 55, 0.18);
+  border-color: rgba(212, 175, 55, 0.18);
 
   box-shadow:
-    0 4px 12px
-    rgba(0, 0, 0, 0.08);
+    0 4px 12px rgba(0, 0, 0, 0.08);
 }
-
-
-/* ============================================================
-   BARRA DORADA OPCIÓN ACTIVA
-============================================================ */
 
 .menu > li > a.activo::before {
   content: "";
@@ -402,20 +547,10 @@ header .logo img {
 
   width: 4px;
 
-  border-radius:
-    0 5px 5px 0;
+  border-radius: 0 5px 5px 0;
 
   background: #D4AF37;
-
-  box-shadow:
-    0 0 8px
-    rgba(212, 175, 55, 0.30);
 }
-
-
-/* ============================================================
-   CONTENIDO DE CADA OPCIÓN
-============================================================ */
 
 .menu-contenido {
   min-width: 0;
@@ -427,17 +562,11 @@ header .logo img {
   gap: 10px;
 }
 
-
 .menu-contenido > span:last-child {
   min-width: 0;
 
   overflow-wrap: break-word;
 }
-
-
-/* ============================================================
-   ICONOS
-============================================================ */
 
 .menu-icon {
   width: 25px;
@@ -462,18 +591,16 @@ header .logo img {
     color 0.20s ease;
 }
 
-
 .menu > li > a:hover .menu-icon,
 .menu > li > a.activo .menu-icon {
   color: #fff;
 
-  transform:
-    scale(1.07);
+  transform: scale(1.07);
 }
 
 
 /* ============================================================
-   FLECHA
+   SUBMENÚ
 ============================================================ */
 
 .flecha {
@@ -490,88 +617,55 @@ header .logo img {
     color 0.25s ease;
 }
 
-
-.has-sub.open >
-.dd-toggle
-.flecha {
-  transform:
-    rotate(90deg);
+.has-sub.open > .dd-toggle .flecha {
+  transform: rotate(90deg);
 
   color: #fff;
 }
 
-
-/* ============================================================
-   SUBMENÚ
-============================================================ */
-
 .submenu {
   display: none;
 
-  width:
-    calc(100% - 10px);
+  width: calc(100% - 10px);
 
-  margin:
-    4px 0 7px 10px;
+  margin: 4px 0 7px 10px;
 
-  padding:
-    5px 0 5px 11px;
+  padding: 5px 0 5px 11px;
 
   list-style: none;
 
-  border-left:
-    2px solid
-    rgba(212, 175, 55, 0.50);
+  border-left: 2px solid rgba(212, 175, 55, 0.50);
 
-  background:
-    rgba(0, 0, 0, 0.08);
+  background: rgba(0, 0, 0, 0.08);
 
-  border-radius:
-    0 7px 7px 0;
+  border-radius: 0 7px 7px 0;
 }
 
-
-.has-sub.open >
-.submenu {
+.has-sub.open > .submenu {
   display: block;
 
-  animation:
-    abrirSubmenu
-    0.22s ease;
+  animation: abrirSubmenu 0.22s ease;
 }
-
-
-/* ============================================================
-   ANIMACIÓN SUBMENÚ
-============================================================ */
 
 @keyframes abrirSubmenu {
 
   from {
     opacity: 0;
 
-    transform:
-      translateY(-4px);
+    transform: translateY(-4px);
   }
 
   to {
     opacity: 1;
 
-    transform:
-      translateY(0);
+    transform: translateY(0);
   }
 
 }
 
-
-/* ============================================================
-   LINKS SUBMENÚ
-============================================================ */
-
 .submenu li {
   width: 100%;
 }
-
 
 .submenu a {
   display: block;
@@ -580,8 +674,7 @@ header .logo img {
 
   padding: 9px 10px;
 
-  color:
-    rgba(255, 255, 255, 0.83);
+  color: rgba(255, 255, 255, 0.83);
 
   font-size: 12.5px;
 
@@ -599,12 +692,10 @@ header .logo img {
     padding-left 0.20s ease;
 }
 
-
 .submenu a:hover {
   color: #fff;
 
-  background:
-    rgba(212, 175, 55, 0.10);
+  background: rgba(212, 175, 55, 0.10);
 
   padding-left: 14px;
 }
@@ -628,11 +719,6 @@ main {
   background: #fff;
 }
 
-
-/* ============================================================
-   IMAGEN DE INICIO
-============================================================ */
-
 .fondo {
   display: block;
 
@@ -645,11 +731,6 @@ main {
 
   object-position: center;
 }
-
-
-/* ============================================================
-   IFRAME
-============================================================ */
 
 .contenido {
   position: absolute;
@@ -666,12 +747,9 @@ main {
   border: none;
 
   background: #fff;
+
+  z-index: 1;
 }
-
-
-/* ============================================================
-   OCULTO
-============================================================ */
 
 .oculto {
   display: none !important;
@@ -696,21 +774,12 @@ main {
       #091b43
     );
 
-  border-top:
-    1px solid
-    rgba(212, 175, 55, 0.20);
+  border-top: 1px solid rgba(212, 175, 55, 0.20);
 
-  border-bottom:
-    1px solid
-    rgba(212, 175, 55, 0.25);
+  border-bottom: 1px solid rgba(212, 175, 55, 0.25);
 
   z-index: 300;
 }
-
-
-/* ============================================================
-   BOTÓN HAMBURGUESA
-============================================================ */
 
 .menu-toggle {
   display: flex;
@@ -723,33 +792,16 @@ main {
 
   gap: 5px;
 
-  border:
-    1px solid
-    rgba(212, 175, 55, 0.42);
+  border: 1px solid rgba(212, 175, 55, 0.42);
 
   border-radius: 8px;
 
-  background:
-    rgba(255, 255, 255, 0.025);
+  background: rgba(255, 255, 255, 0.025);
 
   color: #D4AF37;
 
   cursor: pointer;
-
-  transition:
-    background 0.2s ease,
-    border-color 0.2s ease;
 }
-
-
-.menu-toggle:hover {
-  background:
-    rgba(255, 255, 255, 0.08);
-
-  border-color:
-    rgba(212, 175, 55, 0.75);
-}
-
 
 .menu-toggle span {
   display: block;
@@ -762,7 +814,6 @@ main {
   border-radius: 10px;
 }
 
-
 .menu-toggle strong {
   margin-left: 7px;
 
@@ -770,11 +821,6 @@ main {
 
   font-weight: 500;
 }
-
-
-/* ============================================================
-   OVERLAY
-============================================================ */
 
 .sidebar-overlay {
   display: none;
@@ -809,7 +855,349 @@ footer {
 
 
 /* ============================================================
-   TABLET Y CELULAR
+   FIREBASE AUTHENTICATION
+============================================================ */
+
+.oculto-auth {
+  display: none !important;
+}
+
+.app-protegida {
+  width: 100%;
+
+  min-height: 100vh;
+  min-height: 100dvh;
+
+  display: flex;
+
+  flex-direction: column;
+}
+
+
+/* ============================================================
+   LOGIN
+============================================================ */
+
+.login-screen {
+  position: fixed;
+
+  inset: 0;
+
+  width: 100%;
+
+  min-height: 100vh;
+  min-height: 100dvh;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  padding: 25px;
+
+  background:
+    radial-gradient(
+      circle at top right,
+      rgba(212, 175, 55, 0.14),
+      transparent 35%
+    ),
+    linear-gradient(
+      135deg,
+      #071737 0%,
+      #0B1F4D 48%,
+      #091b43 100%
+    );
+
+  z-index: 99999;
+}
+
+.login-card {
+  width: 100%;
+  max-width: 430px;
+
+  padding: 38px 38px 32px;
+
+  background: #fff;
+
+  border-radius: 18px;
+
+  border: 1px solid rgba(212, 175, 55, 0.30);
+
+  box-shadow:
+    0 25px 70px rgba(0, 0, 0, 0.30);
+
+  text-align: center;
+}
+
+.login-emblema {
+  width: 66px;
+  height: 66px;
+
+  margin: 0 auto 20px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 18px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #0B1F4D,
+      #071737
+    );
+
+  border: 1px solid rgba(212, 175, 55, 0.65);
+
+  color: #D4AF37;
+
+  font-size: 32px;
+
+  box-shadow:
+    0 10px 25px rgba(11, 31, 77, 0.25);
+}
+
+.login-card h1 {
+  margin: 0;
+
+  color: #0B1F4D;
+
+  font-size: 27px;
+
+  font-weight: 650;
+
+  line-height: 1.2;
+}
+
+.login-subtitulo {
+  margin-top: 7px;
+
+  color: #8b6d13;
+
+  font-size: 14px;
+
+  letter-spacing: 0.5px;
+}
+
+.login-linea {
+  width: 85px;
+  height: 2px;
+
+  margin: 20px auto 18px;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      #D4AF37,
+      transparent
+    );
+}
+
+.login-instruccion {
+  margin-bottom: 24px;
+
+  color: #64748b;
+
+  font-size: 14px;
+
+  line-height: 1.5;
+}
+
+.login-campo {
+  margin-bottom: 18px;
+
+  text-align: left;
+}
+
+.login-campo label {
+  display: block;
+
+  margin-bottom: 7px;
+
+  color: #334155;
+
+  font-size: 13px;
+
+  font-weight: 600;
+}
+
+.login-campo input {
+  width: 100%;
+  height: 48px;
+
+  padding: 0 14px;
+
+  border: 1px solid #cbd5e1;
+
+  border-radius: 9px;
+
+  outline: none;
+
+  background: #fff;
+
+  color: #0f172a;
+
+  font-family: inherit;
+
+  font-size: 15px;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.login-campo input:focus {
+  border-color: #D4AF37;
+
+  box-shadow:
+    0 0 0 3px rgba(212, 175, 55, 0.16);
+}
+
+.password-wrapper {
+  position: relative;
+}
+
+.password-wrapper input {
+  padding-right: 50px;
+}
+
+.toggle-password {
+  position: absolute;
+
+  top: 50%;
+  right: 7px;
+
+  transform: translateY(-50%);
+
+  width: 38px;
+  height: 36px;
+
+  border: none;
+
+  border-radius: 7px;
+
+  background: transparent;
+
+  color: #64748b;
+
+  font-size: 17px;
+
+  cursor: pointer;
+}
+
+.toggle-password:hover {
+  background: #f1f5f9;
+
+  color: #0B1F4D;
+}
+
+.login-error {
+  display: none;
+
+  margin: 2px 0 15px;
+
+  padding: 10px 12px;
+
+  border-radius: 8px;
+
+  background: #fef2f2;
+
+  border: 1px solid #fecaca;
+
+  color: #b91c1c;
+
+  font-size: 13px;
+
+  line-height: 1.4;
+
+  text-align: left;
+}
+
+.login-error.visible {
+  display: block;
+}
+
+.login-button {
+  width: 100%;
+  min-height: 49px;
+
+  margin-top: 3px;
+
+  border: 1px solid #D4AF37;
+
+  border-radius: 9px;
+
+  background:
+    linear-gradient(
+      90deg,
+      #0B1F4D,
+      #091b43
+    );
+
+  color: #fff;
+
+  font-family: inherit;
+
+  font-size: 14px;
+
+  font-weight: 600;
+
+  letter-spacing: 0.4px;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    opacity 0.2s ease;
+}
+
+.login-button:hover {
+  transform: translateY(-1px);
+
+  box-shadow:
+    0 8px 18px rgba(11, 31, 77, 0.20);
+}
+
+.login-button:disabled {
+  opacity: 0.65;
+
+  cursor: wait;
+
+  transform: none;
+}
+
+.login-seguridad {
+  margin-top: 22px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 7px;
+
+  color: #94a3b8;
+
+  font-size: 11px;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.8px;
+}
+
+.login-seguridad span {
+  color: #D4AF37;
+
+  font-size: 9px;
+}
+
+
+/* ============================================================
+   TABLET
 ============================================================ */
 
 @media (max-width: 900px) {
@@ -817,8 +1205,7 @@ footer {
   .barra-movil {
     display: flex;
 
-    justify-content:
-      flex-start;
+    justify-content: flex-start;
 
     align-items: center;
   }
@@ -831,57 +1218,43 @@ footer {
   }
 
 
-  /* ========================================================
-     SIDEBAR MÓVIL
-  ======================================================== */
-
   .sidebar {
     position: fixed;
 
     top: 0;
     left: 0;
 
-    width:
-      min(340px, 88vw);
+    width: min(340px, 88vw);
 
     min-width: 0;
 
     height: 100vh;
     height: 100dvh;
 
-    transform:
-      translateX(-105%);
+    transform: translateX(-105%);
 
-    transition:
-      transform 0.28s ease;
+    transition: transform 0.28s ease;
 
     box-shadow:
-      10px 0 30px
-      rgba(0, 0, 0, 0.30);
+      10px 0 30px rgba(0, 0, 0, 0.30);
 
     z-index: 1000;
   }
 
 
   .sidebar.activo {
-    transform:
-      translateX(0);
+    transform: translateX(0);
   }
 
 
   .sidebar-nav {
-    height:
-      calc(100% - 84px);
+    height: calc(100% - 84px);
 
     max-height: none;
 
     padding-bottom: 25px;
   }
 
-
-  /* ========================================================
-     OVERLAY
-  ======================================================== */
 
   .sidebar-overlay {
     position: fixed;
@@ -890,11 +1263,9 @@ footer {
 
     display: block;
 
-    background:
-      rgba(2, 8, 23, 0.56);
+    background: rgba(2, 8, 23, 0.56);
 
-    backdrop-filter:
-      blur(2px);
+    backdrop-filter: blur(2px);
 
     opacity: 0;
 
@@ -914,10 +1285,6 @@ footer {
     visibility: visible;
   }
 
-
-  /* ========================================================
-     MAIN
-  ======================================================== */
 
   main {
     width: 100%;
@@ -947,6 +1314,63 @@ footer {
     font-size: 13px;
   }
 
+
+  /* ========================================================
+     SESIÓN EN TABLET
+  ======================================================== */
+
+  .sesion-superior {
+    right: 6px;
+
+    bottom: 2px;
+
+    transform: none;
+
+    min-height: 29px;
+
+    padding: 3px 5px;
+
+    gap: 4px;
+  }
+
+
+  .sesion-superior-datos strong {
+    max-width: 105px;
+
+    font-size: 8px;
+  }
+
+
+  .sesion-superior-datos span {
+    color: #334155;
+
+    font-size: 8px;
+
+    font-weight: 600;
+  }
+
+
+  .sesion-superior-punto {
+    width: 6px;
+    height: 6px;
+
+    flex: 0 0 6px;
+  }
+
+
+  .btn-cerrar-sesion-superior {
+    min-height: 23px;
+
+    padding: 3px 7px;
+
+    font-size: 8px;
+  }
+
+
+  .icono-salir {
+    font-size: 10px;
+  }
+
 }
 
 
@@ -971,8 +1395,7 @@ footer {
   .sidebar-header {
     min-height: 78px;
 
-    padding:
-      14px 15px 12px;
+    padding: 14px 15px 12px;
   }
 
 
@@ -993,12 +1416,98 @@ footer {
     font-size: 13px;
   }
 
+
+  .login-screen {
+    padding: 18px;
+  }
+
+
+  .login-card {
+    padding: 30px 23px 27px;
+
+    border-radius: 15px;
+  }
+
+
+  .login-card h1 {
+    font-size: 23px;
+  }
+
+
+  .login-emblema {
+    width: 58px;
+    height: 58px;
+
+    font-size: 27px;
+  }
+
+
+  /*
+     En celular ocultamos la información del usuario
+     para evitar cubrir el encabezado.
+  */
+
+  .sesion-superior-usuario,
+  .sesion-separador {
+    display: none;
+  }
+
+
+  .sesion-superior {
+    right: 4px;
+
+    bottom: 2px;
+
+    transform: none;
+
+    min-height: auto;
+
+    padding: 2px;
+
+    border-radius: 5px;
+  }
+
+
+  .btn-cerrar-sesion-superior {
+    min-height: 23px;
+
+    padding: 3px 7px;
+
+    font-size: 8px;
+
+    border-radius: 4px;
+  }
+
 }
 
 
 /* ============================================================
    CELULAR PEQUEÑO
 ============================================================ */
+
+@media (max-width: 430px) {
+
+  .btn-cerrar-sesion-superior span:last-child {
+    display: none;
+  }
+
+
+  .btn-cerrar-sesion-superior {
+    width: 27px;
+    height: 25px;
+
+    min-height: 25px;
+
+    padding: 0;
+  }
+
+
+  .icono-salir {
+    font-size: 12px;
+  }
+
+}
+
 
 @media (max-width: 380px) {
 

@@ -33,16 +33,12 @@ function abrirSidebar() {
 
 
   if (sidebar) {
-
     sidebar.classList.add("activo");
-
   }
 
 
   if (overlay) {
-
     overlay.classList.add("activo");
-
   }
 
 
@@ -83,16 +79,12 @@ function cerrarSidebar() {
 
 
   if (sidebar) {
-
     sidebar.classList.remove("activo");
-
   }
 
 
   if (overlay) {
-
     overlay.classList.remove("activo");
-
   }
 
 
@@ -127,9 +119,7 @@ function toggleSidebar() {
 
 
   if (!sidebar) {
-
     return;
-
   }
 
 
@@ -159,9 +149,7 @@ function cerrarSubmenus(excepto = null) {
     .forEach(item => {
 
       if (item === excepto) {
-
         return;
-
       }
 
 
@@ -206,9 +194,7 @@ function marcarActivo(elemento) {
 
 
   if (elemento) {
-
     elemento.classList.add("activo");
-
   }
 
 }
@@ -221,9 +207,7 @@ function marcarActivo(elemento) {
 function mostrarInicio(e) {
 
   if (e) {
-
     e.preventDefault();
-
   }
 
 
@@ -239,7 +223,6 @@ function mostrarInicio(e) {
 
   cerrarSubmenus();
 
-
   marcarActivo(btnInicio);
 
 
@@ -253,16 +236,12 @@ function mostrarInicio(e) {
 
 
   if (fondo) {
-
     fondo.classList.remove("oculto");
-
   }
 
 
   if (esModoMovil()) {
-
     cerrarSidebar();
-
   }
 
 }
@@ -275,16 +254,12 @@ function mostrarInicio(e) {
 function cargarContenido(url, e) {
 
   if (e) {
-
     e.preventDefault();
-
   }
 
 
   if (!url) {
-
     return;
-
   }
 
 
@@ -310,7 +285,6 @@ function cargarContenido(url, e) {
 
   marcarActivo(enlace);
 
-
   cerrarSubmenus();
 
 
@@ -324,16 +298,12 @@ function cargarContenido(url, e) {
 
 
   if (fondo) {
-
     fondo.classList.add("oculto");
-
   }
 
 
   if (esModoMovil()) {
-
     cerrarSidebar();
-
   }
 
 }
@@ -351,7 +321,6 @@ function configurarSubmenus() {
     )
     .forEach(toggle => {
 
-
       toggle.addEventListener(
         "click",
         e => {
@@ -366,9 +335,7 @@ function configurarSubmenus() {
 
 
           if (!item) {
-
             return;
-
           }
 
 
@@ -412,15 +379,12 @@ function configurarLinks() {
     )
     .forEach(link => {
 
-
       if (
         link.classList.contains(
           "dd-toggle"
         )
       ) {
-
         return;
-
       }
 
 
@@ -428,16 +392,9 @@ function configurarLinks() {
         "click",
         () => {
 
-
           const onclick =
             link.getAttribute("onclick");
 
-
-          /*
-           * Los enlaces que utilizan
-           * cargarContenido() ya se
-           * gestionan desde esa función.
-           */
 
           if (
             onclick &&
@@ -445,40 +402,24 @@ function configurarLinks() {
               "cargarContenido"
             )
           ) {
-
             return;
-
           }
 
-
-          /*
-           * Inicio se gestiona desde
-           * mostrarInicio().
-           */
 
           if (
             link.id === "btnInicio"
           ) {
-
             return;
-
           }
 
 
-          /*
-           * Enlaces externos.
-           */
-
           marcarActivo(link);
-
 
           cerrarSubmenus();
 
 
           if (esModoMovil()) {
-
             cerrarSidebar();
-
           }
 
         }
@@ -502,9 +443,7 @@ function configurarOverlay() {
 
 
   if (!overlay) {
-
     return;
-
   }
 
 
@@ -526,13 +465,10 @@ function configurarEscape() {
     "keydown",
     e => {
 
-
       if (
         e.key !== "Escape"
       ) {
-
         return;
-
       }
 
 
@@ -540,9 +476,7 @@ function configurarEscape() {
 
 
       if (esModoMovil()) {
-
         cerrarSidebar();
-
       }
 
     }
@@ -565,7 +499,6 @@ function configurarResize() {
     "resize",
     () => {
 
-
       const modoActual =
         esModoMovil();
 
@@ -573,9 +506,7 @@ function configurarResize() {
       if (
         modoActual === modoAnterior
       ) {
-
         return;
-
       }
 
 
@@ -601,7 +532,6 @@ document.addEventListener(
   "DOMContentLoaded",
   () => {
 
-
     const btnInicio =
       document.getElementById(
         "btnInicio"
@@ -614,10 +544,6 @@ document.addEventListener(
       );
 
 
-    /* ========================================================
-       INICIO
-    ======================================================== */
-
     if (btnInicio) {
 
       btnInicio.addEventListener(
@@ -626,21 +552,12 @@ document.addEventListener(
       );
 
 
-      /*
-       * Inicio aparece seleccionado
-       * al cargar el sistema.
-       */
-
       btnInicio.classList.add(
         "activo"
       );
 
     }
 
-
-    /* ========================================================
-       BOTÓN MENÚ MÓVIL
-    ======================================================== */
 
     if (menuToggle) {
 
@@ -652,7 +569,6 @@ document.addEventListener(
 
           e.stopPropagation();
 
-
           toggleSidebar();
 
         }
@@ -660,10 +576,6 @@ document.addEventListener(
 
     }
 
-
-    /* ========================================================
-       CONFIGURACIONES
-    ======================================================== */
 
     configurarSubmenus();
 
