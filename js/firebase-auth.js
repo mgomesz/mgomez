@@ -6,7 +6,14 @@
 
    lqg        -> Administrador
    estudiante -> Estudiante
+
+   SEGURIDAD DE SESIÓN:
+
+   - La sesión se conserva solamente durante la pestaña actual.
+   - Al cerrar la pestaña/ventana, deberá iniciar sesión nuevamente.
+   - 15 minutos sin actividad cierran automáticamente la sesión.
 ============================================================ */
+
 
 import {
   initializeApp
@@ -17,7 +24,9 @@ import {
   getAuth,
   signInWithEmailAndPassword,
   onAuthStateChanged,
-  signOut
+  signOut,
+  setPersistence,
+  browserSessionPersistence
 } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
 
 
@@ -58,11 +67,6 @@ const DOMINIO_INTERNO =
 
 /* ============================================================
    USUARIOS Y ROLES
-
-   LQG        -> Administrador
-   estudiante -> Estudiante
-
-   Cualquier otro usuario queda sin permiso.
 ============================================================ */
 
 const ROLES_USUARIOS = {
@@ -75,6 +79,16 @@ const ROLES_USUARIOS = {
 
 
 /* ============================================================
+   CONFIGURACIÓN DE INACTIVIDAD
+
+   15 minutos = 15 * 60 * 1000 milisegundos
+============================================================ */
+
+const TIEMPO_INACTIVIDAD =
+  15 * 60 * 1000;
+
+
+/* ============================================================
    INICIALIZAR FIREBASE
 ============================================================ */
 
@@ -83,6 +97,15 @@ const app =
 
 const auth =
   getAuth(app);
+
+
+/* ============================================================
+   VARIABLES DEL TEMPORIZADOR
+============================================================ */
+
+let temporizadorInactividad = null;
+
+let sesionCerradaPorInactividad = false;
 
 
 /* ============================================================
@@ -226,11 +249,6 @@ function aplicarPermisosMenu(rol) {
         elemento.dataset.permiso || "";
 
 
-      /*
-         "todos" significa que cualquier
-         usuario autorizado puede verlo.
-      */
-
       if (
         permiso === "todos"
       ) {
@@ -242,15 +260,6 @@ function aplicarPermisosMenu(rol) {
 
       }
 
-
-      /*
-         Algunos elementos pueden tener
-         varios roles separados por coma:
-
-         administrador,lqg
-
-         administrador,estudiante
-      */
 
       const rolesPermitidos =
         permiso
@@ -328,7 +337,7 @@ function ocultarError() {
 
 
 /* ============================================================
-   LIMPIAR USUARIO Y CONTRASEÑA
+   LIMPIAR CREDENCIALES
 ============================================================ */
 
 function limpiarCredenciales() {
@@ -375,10 +384,6 @@ function restablecerInicio() {
     );
 
 
-  /*
-     Cerrar contenido cargado anteriormente.
-  */
-
   if (iframe) {
 
     iframe.src =
@@ -391,10 +396,6 @@ function restablecerInicio() {
   }
 
 
-  /*
-     Volver a mostrar la página de inicio.
-  */
-
   if (fondo) {
 
     fondo.classList.remove(
@@ -403,10 +404,6 @@ function restablecerInicio() {
 
   }
 
-
-  /*
-     Marcar Inicio como opción activa.
-  */
 
   document
     .querySelectorAll(
@@ -423,7 +420,10 @@ function restablecerInicio() {
     );
 
 
-  if (btnInicio) {
+  if (
+    btnInicio &&
+    btnInicio.closest("li")?.style.display !== "none"
+  ) {
 
     btnInicio.classList.add(
       "activo"
@@ -431,10 +431,6 @@ function restablecerInicio() {
 
   }
 
-
-  /*
-     Cerrar submenús abiertos.
-  */
 
   document
     .querySelectorAll(
@@ -523,10 +519,6 @@ function mostrarSistema(user) {
     obtenerRolUsuario(user);
 
 
-  /*
-     Mostrar nombre del usuario.
-  */
-
   if (usuarioEmail) {
 
     usuarioEmail.textContent =
@@ -535,25 +527,13 @@ function mostrarSistema(user) {
   }
 
 
-  /*
-     Aplicar permisos según el rol.
-  */
-
   aplicarPermisosMenu(
     rol
   );
 
 
-  /*
-     Cada sesión comienza en Inicio.
-  */
-
   restablecerInicio();
 
-
-  /*
-     Ocultar login.
-  */
 
   if (loginScreen) {
 
@@ -563,10 +543,6 @@ function mostrarSistema(user) {
 
   }
 
-
-  /*
-     Mostrar sistema.
-  */
 
   if (appProtegida) {
 
@@ -581,6 +557,124 @@ function mostrarSistema(user) {
     "";
 
 }
+
+
+/* ============================================================
+   DETENER TEMPORIZADOR DE INACTIVIDAD
+============================================================ */
+
+function detenerTemporizadorInactividad() {
+
+  if (temporizadorInactividad) {
+
+    clearTimeout(
+      temporizadorInactividad
+    );
+
+
+    temporizadorInactividad =
+      null;
+
+  }
+
+}
+
+
+/* ============================================================
+   CERRAR SESIÓN POR INACTIVIDAD
+============================================================ */
+
+async function cerrarSesionPorInactividad() {
+
+  detenerTemporizadorInactividad();
+
+
+  if (!auth.currentUser) {
+    return;
+  }
+
+
+  try {
+
+    sesionCerradaPorInactividad =
+      true;
+
+
+    await signOut(auth);
+
+
+  } catch (error) {
+
+    sesionCerradaPorInactividad =
+      false;
+
+
+    console.error(
+      "Error al cerrar sesión por inactividad:",
+      error
+    );
+
+  }
+
+}
+
+
+/* ============================================================
+   REINICIAR TEMPORIZADOR
+============================================================ */
+
+function reiniciarTemporizadorInactividad() {
+
+  /*
+     Solo necesitamos contar inactividad
+     cuando existe un usuario autenticado.
+  */
+
+  if (!auth.currentUser) {
+
+    detenerTemporizadorInactividad();
+
+    return;
+
+  }
+
+
+  detenerTemporizadorInactividad();
+
+
+  temporizadorInactividad =
+    setTimeout(
+      cerrarSesionPorInactividad,
+      TIEMPO_INACTIVIDAD
+    );
+
+}
+
+
+/* ============================================================
+   ACTIVIDAD DEL USUARIO
+
+   Cualquier actividad reinicia los 15 minutos.
+============================================================ */
+
+[
+  "mousedown",
+  "keydown",
+  "touchstart",
+  "scroll"
+].forEach(
+  evento => {
+
+    window.addEventListener(
+      evento,
+      reiniciarTemporizadorInactividad,
+      {
+        passive: true
+      }
+    );
+
+  }
+);
 
 
 /* ============================================================
@@ -642,6 +736,39 @@ function mensajeErrorFirebase(error) {
 
 
 /* ============================================================
+   CONFIGURAR PERSISTENCIA DE SESIÓN
+
+   IMPORTANTE:
+   browserSessionPersistence utiliza sessionStorage.
+
+   La sesión se mantiene al RECARGAR la misma pestaña,
+   pero no debe conservarse después de cerrar esa pestaña
+   y abrir una nueva.
+============================================================ */
+
+async function configurarPersistencia() {
+
+  try {
+
+    await setPersistence(
+      auth,
+      browserSessionPersistence
+    );
+
+
+  } catch (error) {
+
+    console.error(
+      "No fue posible configurar la persistencia de sesión:",
+      error
+    );
+
+  }
+
+}
+
+
+/* ============================================================
    INICIAR SESIÓN
 ============================================================ */
 
@@ -671,10 +798,6 @@ if (
         loginPassword.value;
 
 
-      /* ------------------------------------------------------
-         VALIDAR USUARIO
-      ------------------------------------------------------ */
-
       if (!usuario) {
 
         mostrarError(
@@ -692,10 +815,6 @@ if (
 
       }
 
-
-      /* ------------------------------------------------------
-         NO PERMITIR CORREOS
-      ------------------------------------------------------ */
 
       if (
         usuario.includes("@")
@@ -716,10 +835,6 @@ if (
 
       }
 
-
-      /* ------------------------------------------------------
-         VALIDAR CONTRASEÑA
-      ------------------------------------------------------ */
 
       if (!password) {
 
@@ -755,9 +870,16 @@ if (
           "Verificando...";
 
 
-        /* ----------------------------------------------------
-           AUTENTICAR CON FIREBASE
-        ---------------------------------------------------- */
+        /*
+           Antes de autenticar configuramos
+           la sesión para que sea temporal.
+        */
+
+        await setPersistence(
+          auth,
+          browserSessionPersistence
+        );
+
 
         const credencial =
           await signInWithEmailAndPassword(
@@ -766,10 +888,6 @@ if (
             password
           );
 
-
-        /* ----------------------------------------------------
-           VERIFICAR QUE EL USUARIO ESTÉ AUTORIZADO
-        ---------------------------------------------------- */
 
         const rol =
           obtenerRolUsuario(
@@ -800,10 +918,6 @@ if (
         }
 
 
-        /* ----------------------------------------------------
-           LOGIN CORRECTO
-        ---------------------------------------------------- */
-
         limpiarCredenciales();
 
 
@@ -813,11 +927,6 @@ if (
           mensajeErrorFirebase(error)
         );
 
-
-        /*
-           Si usuario o contraseña son incorrectos,
-           se limpian ambos campos.
-        */
 
         limpiarCredenciales();
 
@@ -888,7 +997,7 @@ if (
 
 
 /* ============================================================
-   CERRAR SESIÓN
+   CERRAR SESIÓN MANUALMENTE
 ============================================================ */
 
 if (btnCerrarSesion) {
@@ -904,15 +1013,23 @@ if (btnCerrarSesion) {
 
 
         /*
-           Limpiar usuario y contraseña.
+           Detenemos el temporizador.
         */
 
-        limpiarCredenciales();
+        detenerTemporizadorInactividad();
 
 
         /*
-           Cerrar sesión.
+           Este cierre NO fue provocado
+           por inactividad.
         */
+
+        sesionCerradaPorInactividad =
+          false;
+
+
+        limpiarCredenciales();
+
 
         await signOut(auth);
 
@@ -963,15 +1080,12 @@ onAuthStateChanged(
         );
 
 
-      /*
-         Si existe una cuenta en Firebase
-         pero no está incluida en ROLES_USUARIOS,
-         se cierra automáticamente la sesión.
-      */
-
       if (
         rol === "sin-permiso"
       ) {
+
+        detenerTemporizadorInactividad();
+
 
         await signOut(auth);
 
@@ -1000,11 +1114,22 @@ onAuthStateChanged(
       );
 
 
+      /*
+         Comenzamos a contar los
+         15 minutos de inactividad.
+      */
+
+      reiniciarTemporizadorInactividad();
+
+
     } else {
 
       /* ------------------------------------------------------
          SIN SESIÓN
       ------------------------------------------------------ */
+
+      detenerTemporizadorInactividad();
+
 
       limpiarCredenciales();
 
@@ -1014,7 +1139,35 @@ onAuthStateChanged(
 
       mostrarLogin();
 
+
+      /*
+         Si Firebase cerró la sesión debido
+         a nuestros 15 minutos de inactividad,
+         mostramos la explicación.
+      */
+
+      if (
+        sesionCerradaPorInactividad
+      ) {
+
+        mostrarError(
+          "La sesión se cerró automáticamente por 15 minutos de inactividad. Inicie sesión nuevamente."
+        );
+
+
+        sesionCerradaPorInactividad =
+          false;
+
+      }
+
     }
 
   }
 );
+
+
+/* ============================================================
+   CONFIGURACIÓN INICIAL
+============================================================ */
+
+configurarPersistencia();
